@@ -12,13 +12,28 @@ android {
         applicationId = "com.masroufi"
         minSdk = 23
         targetSdk = 35
-        versionCode = 2
-        versionName = "0.1.1"
+        versionCode = 3
+        versionName = "0.1.2"
+    }
+
+    // One fixed key so every build can update the previous install.
+    // It only signs this personal sideloaded app; use a private key before any store release.
+    signingConfigs {
+        create("shared") {
+            storeFile = file("masroufi.keystore")
+            storePassword = "masroufi"
+            keyAlias = "masroufi"
+            keyPassword = "masroufi"
+        }
     }
 
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("shared")
+        }
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("shared")
         }
     }
 
