@@ -28,5 +28,6 @@ Requires JDK 17 and the Android SDK.
 ./gradlew :app:assembleDebug  # APK in app/build/outputs/apk/debug/
 ```
 
-Every push runs the same build on GitHub Actions; the debug APK is attached to the run as the
-`masroufi-debug-apk` artifact, so you can download it and install it on the phone.
+Every push runs the same build on GitHub Actions and publishes the APK as a GitHub release.
+Latest APK: https://github.com/3ARGOUB3/android/releases/latest/download/masroufi.apk
+(Android 6.0 or newer).

@@ -10,10 +10,10 @@ android {
 
     defaultConfig {
         applicationId = "com.masroufi"
-        minSdk = 26
+        minSdk = 23
         targetSdk = 35
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = 2
+        versionName = "0.1.1"
     }
 
     buildTypes {
@@ -25,6 +25,8 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // java.time on Android versions older than 8.0
+        isCoreLibraryDesugaringEnabled = true
     }
 
     buildFeatures {
@@ -44,6 +46,7 @@ kotlin {
 
 dependencies {
     implementation(project(":core"))
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 
     val composeBom = platform("androidx.compose:compose-bom:2024.12.01")
     implementation(composeBom)
