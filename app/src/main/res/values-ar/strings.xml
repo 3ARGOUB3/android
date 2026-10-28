@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">مصروفي</string>
+    <string name="tab_overview">نظرة عامة</string>
+    <string name="tab_transactions">المعاملات</string>
+    <string name="tab_reports">التقارير</string>
+    <string name="import_file">استيراد ملف xls</string>
+    <string name="empty_title">لا توجد بيانات بعد</string>
+    <string name="empty_body">صدّر معاملاتك كملف xls من تطبيق المصاريف، ثم استورده هنا. الاستيراد يستبدل البيانات الموجودة في التطبيق.</string>
+    <string name="imported">تم استيراد %1$d معاملة (تم تخطي %2$d صف)</string>
+    <string name="import_failed">فشل الاستيراد: %1$s</string>
+    <string name="total_balance">الرصيد الإجمالي</string>
+    <string name="wallets">المحافظ</string>
+    <string name="income">الدخل</string>
+    <string name="expenses">المصاريف</string>
+    <string name="net">الصافي</string>
+    <string name="top_categories">أكثر المصاريف</string>
+    <string name="search">ابحث في الملاحظات والأقسام والمحافظ</string>
+    <string name="clear">مسح</string>
+    <string name="results">%1$d معاملة</string>
+    <string name="month">شهر</string>
+    <string name="year">سنة</string>
+    <string name="previous">السابق</string>
+    <string name="next">التالي</string>
+    <string name="by_category">المصاريف حسب القسم</string>
+    <string name="last_12_months">آخر 12 شهرًا</string>
+    <string name="no_expenses">لا توجد مصاريف في هذه الفترة</string>
+    <string name="all_categories">كل الأقسام</string>
+    <string name="transfer">تحويل</string>
+</resources>

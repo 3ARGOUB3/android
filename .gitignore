@@ -1,0 +1,13 @@
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+.kotlin/
+captures/
+*.apk
+*.aab
+# Personal finance exports should not be committed
+*.xls
+*.xlsx

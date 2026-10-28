@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Masroufi</string>
+    <string name="tab_overview">Overview</string>
+    <string name="tab_transactions">Transactions</string>
+    <string name="tab_reports">Reports</string>
+    <string name="import_file">Import .xls</string>
+    <string name="empty_title">No data yet</string>
+    <string name="empty_body">Export your transactions as an .xls file from your expense app, then import it here. Importing replaces the data already in the app.</string>
+    <string name="imported">Imported %1$d transactions (%2$d rows skipped)</string>
+    <string name="import_failed">Import failed: %1$s</string>
+    <string name="total_balance">Total balance</string>
+    <string name="wallets">Wallets</string>
+    <string name="income">Income</string>
+    <string name="expenses">Spending</string>
+    <string name="net">Net</string>
+    <string name="top_categories">Top spending</string>
+    <string name="search">Search notes, categories, wallets</string>
+    <string name="clear">Clear</string>
+    <string name="results">%1$d transactions</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="by_category">Spending by category</string>
+    <string name="last_12_months">Last 12 months</string>
+    <string name="no_expenses">No spending in this period</string>
+    <string name="all_categories">All categories</string>
+    <string name="transfer">Transfer</string>
+</resources>
