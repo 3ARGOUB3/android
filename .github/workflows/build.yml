@@ -21,20 +21,17 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
-      - name: Test and build debug APKs
-        run: ./gradlew --no-daemon :core:test :app:assembleDebug :personnel-core:test :personnel:assembleDebug
+      - name: Test and build Masroufi APK
+        run: ./gradlew --no-daemon :core:test :app:assembleDebug
 
-      - name: Rename APKs
+      - name: Rename APK
         run: |
           cp app/build/outputs/apk/debug/app-debug.apk masroufi.apk
-          cp personnel/build/outputs/apk/debug/personnel-debug.apk personnel.apk
 
       - uses: actions/upload-artifact@v4
         with:
           name: android
-          path: |
-            masroufi.apk
-            personnel.apk
+          path: masroufi.apk
           if-no-files-found: error
 
   windows:
@@ -49,9 +46,9 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
-      - name: Build Windows installer and portable app
+      - name: Test, then build Windows installer and portable app
         shell: bash
-        run: ./gradlew --no-daemon "-PdesktopVersion=1.0.${{ github.run_number }}" :personnel-desktop:packageMsi :personnel-desktop:createDistributable
+        run: ./gradlew --no-daemon "-PdesktopVersion=1.0.${{ github.run_number }}" :personnel-core:test :personnel-desktop:packageMsi :personnel-desktop:createDistributable
 
       - name: Collect files
         shell: pwsh
@@ -87,12 +84,10 @@ jobs:
           make_latest: true
           files: |
             masroufi.apk
-            personnel.apk
             GestionPersonnel.msi
             GestionPersonnel-windows.zip
           body: |
             Build from `${{ github.ref_name }}` (${{ github.sha }}).
-            - `personnel.apk`: Gestion du personnel for Android.
             - `GestionPersonnel.msi`: Gestion du personnel for Windows (installer).
             - `GestionPersonnel-windows.zip`: same for Windows without installing (unzip, run GestionPersonnel.exe).
             - `masroufi.apk`: Masroufi (expenses) for Android.

@@ -48,7 +48,7 @@ val dataDir: File = System.getenv("APPDATA")?.takeIf { it.isNotBlank() }
     ?.let { File(it, "GestionPersonnel") }
     ?: File(System.getProperty("user.home"), ".gestion-personnel")
 
-/** Desktop counterpart of the Android PersonnelViewModel, with the same actions. */
+/** The app's data, screens stack and actions. */
 class AppState(private val scope: CoroutineScope) {
 
     private val store = RegisterStore(File(dataDir, "registres"))

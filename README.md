@@ -34,56 +34,43 @@ Latest APK: https://github.com/3ARGOUB3/android/releases/latest/download/masrouf
 
 ---
 
-# Gestion du personnel (تسيير العمال)
+# Gestion du personnel (تسيير العمال) – PC
 
-A second app in this repo (`personnel/`, `personnel-core/`) for keeping the disciplinary and
-salary registers of workers:
+A Windows program (`personnel-desktop/`, with its logic in `personnel-core/`) for keeping the
+disciplinary and salary registers of workers:
 
 Suspension de salaire · Rétablissement de salaire · Mise en demeure · Questionnaire ·
 Convocation pour entretien · Convocation pour affaire (sans date) · PV d'audition ·
 Lettre de radiation · Suspension mise à l'essai · Rétablissement mise à l'essai
 
+## Download
+
+- Installer: https://github.com/3ARGOUB3/android/releases/latest/download/GestionPersonnel.msi
+- Without installing: https://github.com/3ARGOUB3/android/releases/latest/download/GestionPersonnel-windows.zip
+  (unzip, then run `GestionPersonnel.exe`)
+
 ## How it works
 
-- **Import** the Excel file (.xlsx or .xls) already filled for a register: the app takes its
-  columns from the header row (title lines above it are skipped) and keeps every line.
-  Before importing, the user can change the header row, the first line to import, and untick
-  columns that are not needed.
-  A workbook with one sheet per register can be imported at once from the home screen; each
-  sheet is matched to a register by its name and can be reassigned before importing.
-- **Add lines** after the imported ones. The form shows the register's own columns:
+- **Import** the Excel file (.xlsx or .xls) already filled for a register. Before importing,
+  choose the header row, the first line to import, and untick columns that are not needed.
+  A workbook with one sheet per register can be imported at once; each sheet is matched to a
+  register by its name and can be reassigned.
+- **Registers** show as a table; click a line to edit it, or add new lines after the imported
+  ones. The form shows the register's own columns:
   - typing a known *Matricule* fills *Nom prénom* and *Fonction* from any register;
   - name fields suggest matching workers;
   - date columns have a date picker, `N°` columns get the next number,
     other columns suggest values already used.
 - **Travailleurs**: search a worker and see all their lines in every register, or start a new
   document for them.
-- **Export** a register, or all of them, to .xlsx (one sheet per register) to continue in Excel.
+- **Export** a register, or all of them, to .xlsx (one sheet per register).
 - Columns can be renamed, added or removed per register.
-- French and Arabic UI (follows the phone language).
+- French and Arabic (switch in the menu). Escape goes back.
 
-Data stays on the phone (one JSON file per register in the app's storage).
-
-```sh
-./gradlew :personnel-core:test :personnel:assembleDebug
-```
-
-Latest APK: https://github.com/3ARGOUB3/android/releases/latest/download/personnel.apk
-
-## PC version (Windows)
-
-`personnel-desktop/` is the same app for the PC (Compose Desktop, sharing `personnel-core`).
-Registers open as a table; click a line to edit it. Escape goes back. The menu switches
-between French and Arabic and shows the data folder (`%APPDATA%\GestionPersonnel`, or
-`~/.gestion-personnel` on Mac/Linux).
-
-- Installer: https://github.com/3ARGOUB3/android/releases/latest/download/GestionPersonnel.msi
-- Without installing: https://github.com/3ARGOUB3/android/releases/latest/download/GestionPersonnel-windows.zip
-  (unzip, then run `GestionPersonnel.exe`)
-
-The phone and the PC each keep their own data; move it between them with Excel export/import.
+Data is saved in `%APPDATA%\GestionPersonnel` (`~/.gestion-personnel` on Mac/Linux).
 
 ```sh
+./gradlew :personnel-core:test                # unit tests
 ./gradlew :personnel-desktop:run              # run on this computer
 ./gradlew :personnel-desktop:packageMsi       # Windows installer (on Windows)
 ```

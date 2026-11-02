@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import java.util.Locale
 
-/** A UI text in French and Arabic (same texts as the Android app's strings.xml). */
+/** A UI text in French and Arabic. */
 class Str(val fr: String, val ar: String)
 
 /** Current UI language. Compose state, so switching it redraws the window. */
@@ -16,7 +16,7 @@ object Lang {
 
 fun text(s: Str, vararg args: Any): String = String.format(Locale.ROOT, if (Lang.arabic) s.ar else s.fr, *args)
 
-/** Same call shape as Android's stringResource so the screens read the same on both. */
+/** Text for the current language, read from Compose so screens follow language changes. */
 @Composable
 fun stringResource(s: Str, vararg args: Any): String = text(s, *args)
 
