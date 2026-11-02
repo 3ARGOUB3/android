@@ -42,7 +42,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.personnel.PendingImport
 import com.personnel.PersonnelViewModel
 import com.personnel.R
 import com.personnel.Screen
@@ -120,84 +119,6 @@ fun PersonnelApp(vm: PersonnelViewModel = viewModel()) {
     }
 
     state.pendingImport?.let { ImportDialog(it, state.registers, vm) }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun ImportDialog(pending: PendingImport, registers: List<Register>, vm: PersonnelViewModel) {
-    val replaced = pending.targets.filterNotNull().mapNotNull { id -> registers.firstOrNull { it.id == id } }
-        .filter { it.rows.isNotEmpty() }
-    AlertDialog(
-        onDismissRequest = vm::cancelImport,
-        title = { Text(stringResource(R.string.import_title)) },
-        text = {
-            Column(
-                Modifier.verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
-                Text(pending.fileName, style = MaterialTheme.typography.bodySmall)
-                pending.tables.forEachIndexed { i, table ->
-                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(
-                            stringResource(R.string.sheet_summary, table.sheetName, table.rows.size),
-                            style = MaterialTheme.typography.titleSmall,
-                        )
-                        Text(
-                            table.columns.joinToString(" · "),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            maxLines = 3,
-                        )
-                        var expanded by remember { mutableStateOf(false) }
-                        val target = registers.firstOrNull { it.id == pending.targets[i] }
-                        ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = it }) {
-                            OutlinedTextField(
-                                value = target?.title ?: stringResource(R.string.skip_sheet),
-                                onValueChange = {},
-                                readOnly = true,
-                                singleLine = true,
-                                label = { Text(stringResource(R.string.import_into)) },
-                                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .menuAnchor(MenuAnchorType.PrimaryNotEditable),
-                            )
-                            ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                                DropdownMenuItem(
-                                    text = { Text(stringResource(R.string.skip_sheet)) },
-                                    onClick = { vm.setImportTarget(i, null); expanded = false },
-                                )
-                                registers.forEach { register ->
-                                    DropdownMenuItem(
-                                        text = { Text(register.title) },
-                                        onClick = { vm.setImportTarget(i, register.id); expanded = false },
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-                if (replaced.isNotEmpty()) {
-                    Text(
-                        stringResource(
-                            R.string.import_replaces,
-                            replaced.joinToString("\n") { "• ${it.title} (${it.rows.size})" },
-                        ),
-                        color = MaterialTheme.colorScheme.error,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                }
-            }
-        },
-        confirmButton = {
-            TextButton(onClick = vm::confirmImport, enabled = pending.targets.any { it != null }) {
-                Text(stringResource(R.string.import_confirm))
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = vm::cancelImport) { Text(stringResource(R.string.cancel)) }
-        },
-    )
 }
 
 private fun displayName(context: Context, uri: Uri): String =

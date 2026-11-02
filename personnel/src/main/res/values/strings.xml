@@ -54,4 +54,9 @@
     <string name="matricule_value">Matricule : %1$s</string>
     <string name="function_value">Fonction : %1$s</string>
     <string name="records_count">%1$d ligne(s) dans les registres</string>
+    <string name="header_row">Ligne des titres de colonnes</string>
+    <string name="first_data_row">Première ligne à importer</string>
+    <string name="columns_to_import">Colonnes à importer (touchez une colonne pour la retirer)</string>
+    <string name="rows_to_import">%1$d lignes et %2$d colonnes seront importées</string>
+    <string name="no_columns">Choisissez au moins une colonne</string>
 </resources>

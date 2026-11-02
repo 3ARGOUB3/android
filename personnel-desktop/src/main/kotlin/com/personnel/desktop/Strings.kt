@@ -77,6 +77,11 @@ object R {
         val matricule_value = Str("Matricule : %1\$s", "الرقم: %1\$s")
         val function_value = Str("Fonction : %1\$s", "الوظيفة: %1\$s")
         val records_count = Str("%1\$d ligne(s) dans les registres", "%1\$d سطر في السجلات")
+        val header_row = Str("Ligne des titres de colonnes", "سطر عناوين الأعمدة")
+        val first_data_row = Str("Première ligne à importer", "أول سطر يُستورد")
+        val columns_to_import = Str("Colonnes à importer (touchez une colonne pour la retirer)", "الأعمدة المستوردة (اضغط على عمود لإزالته)")
+        val rows_to_import = Str("%1\$d lignes et %2\$d colonnes seront importées", "سيُستورد %1\$d سطر و %2\$d عمود")
+        val no_columns = Str("Choisissez au moins une colonne", "اختر عمودا واحدا على الأقل")
         val language_switch = Str("العربية", "Français")
         val data_folder = Str("Données : %1\$s", "البيانات: %1\$s")
     }

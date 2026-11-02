@@ -37,10 +37,10 @@ object SpreadsheetReader {
     }
 
     /**
-     * Finds the header row (the first row naming a "Matricule" or "Nom" column, else the first
-     * row with two or more cells) and returns the rows below it. Title lines above it are skipped.
+     * The header row (zero-based): the first row naming a "Matricule" or "Nom" column, else the
+     * first row with two or more cells. Title lines above it are skipped. Null for an empty sheet.
      */
-    fun toTable(sheet: Sheet): Table? {
+    fun detectHeaderRow(sheet: Sheet): Int? {
         val rows = sheet.rows
         val searched = rows.take(30)
         var headerIndex = searched.indexOfFirst { row ->
@@ -50,20 +50,41 @@ object SpreadsheetReader {
         }
         if (headerIndex < 0) headerIndex = searched.indexOfFirst { row -> row.count { it.isNotBlank() } >= 2 }
         if (headerIndex < 0) headerIndex = rows.indexOfFirst { row -> row.any { it.isNotBlank() } }
-        if (headerIndex < 0) return null
+        return headerIndex.takeIf { it >= 0 }
+    }
 
-        val header = rows[headerIndex]
-        val data = rows.drop(headerIndex + 1).filter { row -> row.any { it.isNotBlank() } }
+    /** The sheet read with the detected header row, all columns and the rows right below it. */
+    fun toTable(sheet: Sheet): Table? =
+        detectHeaderRow(sheet)?.let { toTable(sheet, it, it + 1) }
+
+    /** Every column name for this header row (empty headers become "Colonne N"). */
+    fun columnsOf(sheet: Sheet, headerRow: Int, firstDataRow: Int): List<String> {
+        val header = sheet.rows.getOrElse(headerRow) { emptyList() }
         val width = maxOf(
             header.indexOfLast { it.isNotBlank() } + 1,
-            data.maxOfOrNull { row -> row.indexOfLast { it.isNotBlank() } + 1 } ?: 0,
+            dataRows(sheet, firstDataRow).maxOfOrNull { row -> row.indexOfLast { it.isNotBlank() } + 1 } ?: 0,
         )
-        val columns = (0 until width).map { i ->
+        return (0 until width).map { i ->
             header.getOrNull(i)?.replace(Regex("\\s+"), " ")?.trim().orEmpty().ifEmpty { "Colonne ${i + 1}" }
         }
-        val body = data.map { row -> (0 until width).map { i -> row.getOrNull(i)?.trim().orEmpty() } }
-        return Table(sheet.name, columns, body)
     }
+
+    /**
+     * The sheet read with the user's choices: column names from [headerRow], lines from
+     * [firstDataRow] on (both zero-based), keeping only the [keep] columns (null = all).
+     * Lines left empty in the kept columns are dropped.
+     */
+    fun toTable(sheet: Sheet, headerRow: Int, firstDataRow: Int, keep: Set<Int>? = null): Table {
+        val all = columnsOf(sheet, headerRow, firstDataRow)
+        val kept = all.indices.filter { keep == null || it in keep }
+        val body = dataRows(sheet, firstDataRow)
+            .map { row -> kept.map { i -> row.getOrNull(i)?.trim().orEmpty() } }
+            .filter { row -> row.any { it.isNotEmpty() } }
+        return Table(sheet.name, kept.map { all[it] }, body)
+    }
+
+    private fun dataRows(sheet: Sheet, firstDataRow: Int): List<List<String>> =
+        sheet.rows.drop(firstDataRow.coerceAtLeast(0))
 
     // ---------- .xls ----------
 

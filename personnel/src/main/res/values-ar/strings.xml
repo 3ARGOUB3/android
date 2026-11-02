@@ -54,4 +54,9 @@
     <string name="matricule_value">الرقم: %1$s</string>
     <string name="function_value">الوظيفة: %1$s</string>
     <string name="records_count">%1$d سطر في السجلات</string>
+    <string name="header_row">سطر عناوين الأعمدة</string>
+    <string name="first_data_row">أول سطر يُستورد</string>
+    <string name="columns_to_import">الأعمدة المستوردة (اضغط على عمود لإزالته)</string>
+    <string name="rows_to_import">سيُستورد %1$d سطر و %2$d عمود</string>
+    <string name="no_columns">اختر عمودا واحدا على الأقل</string>
 </resources>

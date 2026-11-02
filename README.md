@@ -47,6 +47,8 @@ Lettre de radiation · Suspension mise à l'essai · Rétablissement mise à l'e
 
 - **Import** the Excel file (.xlsx or .xls) already filled for a register: the app takes its
   columns from the header row (title lines above it are skipped) and keeps every line.
+  Before importing, the user can change the header row, the first line to import, and untick
+  columns that are not needed.
   A workbook with one sheet per register can be imported at once from the home screen; each
   sheet is matched to a register by its name and can be reassigned before importing.
 - **Add lines** after the imported ones. The form shows the register's own columns:

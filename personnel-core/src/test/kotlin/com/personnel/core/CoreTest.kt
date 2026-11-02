@@ -64,6 +64,47 @@ class CoreTest {
     }
 
     @Test
+    fun userChoosesRowsAndColumns() {
+        val sheet = Sheet(
+            "Feuil1",
+            listOf(
+                listOf("REGISTRE"),
+                listOf("Matricule", "Nom", "Fonction", "Inutile", "Motif"),
+                listOf("1", "A", "Agent", "x", "Retard"),
+                listOf("2", "B", "Chef", "y", "Absence"),
+                listOf("3", "C", "Agent", "", ""),
+            ),
+        )
+        val detected = SheetChoice.plan(listOf(sheet), emptyList(), null).single()
+        assertEquals(1, detected.headerRow)
+        assertEquals(3, detected.table.rows.size)
+
+        // Leave out "Inutile" and start at the second line.
+        val chosen = detected.toggleColumn(3).withFirstDataRow(3)
+        assertEquals(listOf("Matricule", "Nom", "Fonction", "Motif"), chosen.table.columns)
+        assertEquals(listOf(listOf("2", "B", "Chef", "Absence"), listOf("3", "C", "Agent", "")), chosen.table.rows)
+
+        // A new header row keeps every column again and starts the lines below it.
+        val other = chosen.withHeaderRow(0)
+        assertEquals(1, other.firstDataRow)
+        assertEquals(emptySet(), other.excluded)
+        assertEquals("REGISTRE", other.allColumns.first())
+
+        // Lines cannot start above the header row.
+        assertEquals(2, detected.withFirstDataRow(0).firstDataRow)
+    }
+
+    @Test
+    fun oneSheetPerRegister() {
+        val registers = DEFAULT_REGISTERS.map { (id, title) -> Register(id, title) }
+        val sheet = { name: String -> Sheet(name, listOf(listOf("Matricule", "Nom"), listOf("1", "A"))) }
+        val plan = SheetChoice.plan(listOf(sheet("Mise en demeure"), sheet("Questionnaire")), registers, null)
+        assertEquals(listOf("mise_en_demeure", "questionnaire"), plan.map { it.target })
+        val moved = SheetChoice.setTarget(plan, 1, "mise_en_demeure")
+        assertEquals(listOf(null, "mise_en_demeure"), moved.map { it.target })
+    }
+
+    @Test
     fun numbersAndDates() {
         assertEquals("1234", SpreadsheetReader.formatNumber(1234.0))
         assertEquals("0.3", SpreadsheetReader.formatNumber(0.1 + 0.2))

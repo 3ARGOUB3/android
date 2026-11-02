@@ -7,9 +7,8 @@ import androidx.compose.runtime.setValue
 import com.personnel.core.Register
 import com.personnel.core.RegisterStore
 import com.personnel.core.Row
-import com.personnel.core.SheetMatcher
+import com.personnel.core.SheetChoice
 import com.personnel.core.SpreadsheetReader
-import com.personnel.core.Table
 import com.personnel.core.WorkerDirectory
 import com.personnel.core.XlsxWriter
 import com.personnel.core.withColumns
@@ -31,9 +30,7 @@ sealed interface Screen {
 /** Sheets read from a picked file, waiting for the user to say which register each one fills. */
 data class PendingImport(
     val fileName: String,
-    val tables: List<Table>,
-    /** Register id chosen for each table, or null to skip it. */
-    val targets: List<String?>,
+    val choices: List<SheetChoice>,
 )
 
 data class UiState(
@@ -130,43 +127,35 @@ class AppState(private val scope: CoroutineScope) {
         state = state.copy(loading = true)
         scope.launch {
             val result = withContext(Dispatchers.IO) {
-                runCatching { SpreadsheetReader.read(file.readBytes()).mapNotNull(SpreadsheetReader::toTable) }
+                runCatching { SpreadsheetReader.read(file.readBytes()) }
             }
             result.fold(
-                onSuccess = { tables ->
-                    if (tables.isEmpty()) {
+                onSuccess = { sheets ->
+                    val choices = SheetChoice.plan(sheets, state.registers, forRegisterId)
+                    if (choices.isEmpty()) {
                         fail(text(R.string.no_data))
                         return@fold
                     }
-                    val registers = state.registers
-                    val targets: List<String?> = if (forRegisterId != null) {
-                        val best = tables.indexOfFirst { SheetMatcher.bestRegister(it.sheetName, registers)?.id == forRegisterId }
-                            .takeIf { it >= 0 } ?: tables.indexOfFirst { it.rows.isNotEmpty() }.coerceAtLeast(0)
-                        tables.indices.map { if (it == best) forRegisterId else null }
-                    } else {
-                        val used = HashSet<String>()
-                        tables.map { table ->
-                            SheetMatcher.bestRegister(table.sheetName, registers)?.id?.takeIf { used.add(it) }
-                        }
-                    }
-                    state = state.copy(loading = false, pendingImport = PendingImport(file.name, tables, targets))
+                    state = state.copy(loading = false, pendingImport = PendingImport(file.name, choices))
                 },
                 onFailure = { error -> fail(text(R.string.import_failed, error.message ?: error.javaClass.simpleName)) },
             )
         }
     }
 
-    fun setImportTarget(tableIndex: Int, registerId: String?) {
+    fun setImportTarget(index: Int, registerId: String?) =
+        editImport { SheetChoice.setTarget(it, index, registerId) }
+
+    /** [row] is zero-based. */
+    fun setHeaderRow(index: Int, row: Int) = editImport { list -> list.mapIndexed { i, c -> if (i == index) c.withHeaderRow(row) else c } }
+
+    fun setFirstDataRow(index: Int, row: Int) = editImport { list -> list.mapIndexed { i, c -> if (i == index) c.withFirstDataRow(row) else c } }
+
+    fun toggleColumn(index: Int, column: Int) = editImport { list -> list.mapIndexed { i, c -> if (i == index) c.toggleColumn(column) else c } }
+
+    private fun editImport(transform: (List<SheetChoice>) -> List<SheetChoice>) {
         val pending = state.pendingImport ?: return
-        // A register takes one sheet: choosing it here clears it elsewhere.
-        val targets = pending.targets.mapIndexed { i, t ->
-            when {
-                i == tableIndex -> registerId
-                registerId != null && t == registerId -> null
-                else -> t
-            }
-        }
-        state = state.copy(pendingImport = pending.copy(targets = targets))
+        state = state.copy(pendingImport = pending.copy(choices = transform(pending.choices)))
     }
 
     fun cancelImport() {
@@ -176,8 +165,8 @@ class AppState(private val scope: CoroutineScope) {
     /** Replaces the chosen registers with the sheets' columns and lines. */
     fun confirmImport() {
         val pending = state.pendingImport ?: return
-        val byId = pending.tables.indices
-            .mapNotNull { i -> pending.targets[i]?.let { it to pending.tables[i] } }
+        val byId = pending.choices
+            .mapNotNull { c -> c.target?.let { it to c.table } }
             .toMap()
         val updated = state.registers.map { register ->
             val table = byId[register.id] ?: return@map register
