@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  android:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,16 +31,54 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: debug-apks
+          name: android
           path: |
             masroufi.apk
             personnel.apk
           if-no-files-found: error
 
-      # A release per build gives a direct .apk link that opens on a phone:
-      # https://github.com/<owner>/<repo>/releases/latest/download/masroufi.apk (or personnel.apk)
-      - name: Publish APK as a release
-        if: github.event_name != 'pull_request'
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build Windows installer and portable app
+        shell: bash
+        run: ./gradlew --no-daemon "-PdesktopVersion=1.0.${{ github.run_number }}" :personnel-desktop:packageMsi :personnel-desktop:createDistributable
+
+      - name: Collect files
+        shell: pwsh
+        run: |
+          Copy-Item (Get-ChildItem personnel-desktop/build/compose/binaries/main/msi/*.msi | Select-Object -First 1).FullName GestionPersonnel.msi
+          Compress-Archive -Path personnel-desktop/build/compose/binaries/main/app/GestionPersonnel -DestinationPath GestionPersonnel-windows.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: |
+            GestionPersonnel.msi
+            GestionPersonnel-windows.zip
+          if-no-files-found: error
+
+  # A release per build gives direct download links:
+  # https://github.com/<owner>/<repo>/releases/latest/download/<file>
+  release:
+    if: github.event_name != 'pull_request'
+    needs: [android, windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+
+      - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: build-${{ github.run_number }}
@@ -50,6 +88,11 @@ jobs:
           files: |
             masroufi.apk
             personnel.apk
+            GestionPersonnel.msi
+            GestionPersonnel-windows.zip
           body: |
-            Debug build from `${{ github.ref_name }}` (${{ github.sha }}).
-            Download `masroufi.apk` (expenses) or `personnel.apk` (gestion du personnel) on the phone and open it to install.
+            Build from `${{ github.ref_name }}` (${{ github.sha }}).
+            - `personnel.apk`: Gestion du personnel for Android.
+            - `GestionPersonnel.msi`: Gestion du personnel for Windows (installer).
+            - `GestionPersonnel-windows.zip`: same for Windows without installing (unzip, run GestionPersonnel.exe).
+            - `masroufi.apk`: Masroufi (expenses) for Android.

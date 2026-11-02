@@ -67,3 +67,21 @@ Data stays on the phone (one JSON file per register in the app's storage).
 ```
 
 Latest APK: https://github.com/3ARGOUB3/android/releases/latest/download/personnel.apk
+
+## PC version (Windows)
+
+`personnel-desktop/` is the same app for the PC (Compose Desktop, sharing `personnel-core`).
+Registers open as a table; click a line to edit it. Escape goes back. The menu switches
+between French and Arabic and shows the data folder (`%APPDATA%\GestionPersonnel`, or
+`~/.gestion-personnel` on Mac/Linux).
+
+- Installer: https://github.com/3ARGOUB3/android/releases/latest/download/GestionPersonnel.msi
+- Without installing: https://github.com/3ARGOUB3/android/releases/latest/download/GestionPersonnel-windows.zip
+  (unzip, then run `GestionPersonnel.exe`)
+
+The phone and the PC each keep their own data; move it between them with Excel export/import.
+
+```sh
+./gradlew :personnel-desktop:run              # run on this computer
+./gradlew :personnel-desktop:packageMsi       # Windows installer (on Windows)
+```
