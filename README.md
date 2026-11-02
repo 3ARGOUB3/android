@@ -31,3 +31,39 @@ Requires JDK 17 and the Android SDK.
 Every push runs the same build on GitHub Actions and publishes the APK as a GitHub release.
 Latest APK: https://github.com/3ARGOUB3/android/releases/latest/download/masroufi.apk
 (Android 6.0 or newer).
+
+---
+
+# Gestion du personnel (تسيير العمال)
+
+A second app in this repo (`personnel/`, `personnel-core/`) for keeping the disciplinary and
+salary registers of workers:
+
+Suspension de salaire · Rétablissement de salaire · Mise en demeure · Questionnaire ·
+Convocation pour entretien · Convocation pour affaire (sans date) · PV d'audition ·
+Lettre de radiation · Suspension mise à l'essai · Rétablissement mise à l'essai
+
+## How it works
+
+- **Import** the Excel file (.xlsx or .xls) already filled for a register: the app takes its
+  columns from the header row (title lines above it are skipped) and keeps every line.
+  A workbook with one sheet per register can be imported at once from the home screen; each
+  sheet is matched to a register by its name and can be reassigned before importing.
+- **Add lines** after the imported ones. The form shows the register's own columns:
+  - typing a known *Matricule* fills *Nom prénom* and *Fonction* from any register;
+  - name fields suggest matching workers;
+  - date columns have a date picker, `N°` columns get the next number,
+    other columns suggest values already used.
+- **Travailleurs**: search a worker and see all their lines in every register, or start a new
+  document for them.
+- **Export** a register, or all of them, to .xlsx (one sheet per register) to continue in Excel.
+- Columns can be renamed, added or removed per register.
+- French and Arabic UI (follows the phone language).
+
+Data stays on the phone (one JSON file per register in the app's storage).
+
+```sh
+./gradlew :personnel-core:test :personnel:assembleDebug
+```
+
+Latest APK: https://github.com/3ARGOUB3/android/releases/latest/download/personnel.apk

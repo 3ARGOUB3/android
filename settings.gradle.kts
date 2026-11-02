@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Masroufi"
-include(":core", ":app")
+include(":core", ":app", ":personnel-core", ":personnel")
