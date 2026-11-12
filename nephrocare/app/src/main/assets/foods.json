@@ -1,0 +1,1577 @@
+{
+ "foods": [
+  {
+   "id": "apple",
+   "g": "fruit",
+   "n": {
+    "ar": "تفاح",
+    "fr": "Pomme",
+    "en": "Apple",
+    "es": "Manzana"
+   },
+   "k": 107,
+   "p": 11,
+   "na": 1,
+   "pr": 0.3,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "pear",
+   "g": "fruit",
+   "n": {
+    "ar": "إجاص",
+    "fr": "Poire",
+    "en": "Pear",
+    "es": "Pera"
+   },
+   "k": 116,
+   "p": 12,
+   "na": 1,
+   "pr": 0.4,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "pineapple",
+   "g": "fruit",
+   "n": {
+    "ar": "أناناس",
+    "fr": "Ananas",
+    "en": "Pineapple",
+    "es": "Piña"
+   },
+   "k": 109,
+   "p": 8,
+   "na": 1,
+   "pr": 0.5,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "strawberry",
+   "g": "fruit",
+   "n": {
+    "ar": "فراولة",
+    "fr": "Fraise",
+    "en": "Strawberry",
+    "es": "Fresa"
+   },
+   "k": 153,
+   "p": 24,
+   "na": 1,
+   "pr": 0.7,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "grapes",
+   "g": "fruit",
+   "n": {
+    "ar": "عنب",
+    "fr": "Raisin",
+    "en": "Grapes",
+    "es": "Uvas"
+   },
+   "k": 191,
+   "p": 20,
+   "na": 2,
+   "pr": 0.7,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "watermelon",
+   "g": "fruit",
+   "n": {
+    "ar": "دلاع (بطيخ أحمر)",
+    "fr": "Pastèque",
+    "en": "Watermelon",
+    "es": "Sandía"
+   },
+   "k": 112,
+   "p": 11,
+   "na": 1,
+   "pr": 0.6,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "melon",
+   "g": "fruit",
+   "n": {
+    "ar": "بطيخ أصفر (شمام)",
+    "fr": "Melon",
+    "en": "Melon",
+    "es": "Melón"
+   },
+   "k": 267,
+   "p": 15,
+   "na": 16,
+   "pr": 0.8,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "orange",
+   "g": "fruit",
+   "n": {
+    "ar": "برتقال",
+    "fr": "Orange",
+    "en": "Orange",
+    "es": "Naranja"
+   },
+   "k": 181,
+   "p": 14,
+   "na": 0,
+   "pr": 0.9,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "mandarin",
+   "g": "fruit",
+   "n": {
+    "ar": "يوسفي (مندرين)",
+    "fr": "Mandarine",
+    "en": "Mandarin",
+    "es": "Mandarina"
+   },
+   "k": 166,
+   "p": 20,
+   "na": 2,
+   "pr": 0.8,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "peach",
+   "g": "fruit",
+   "n": {
+    "ar": "خوخ",
+    "fr": "Pêche",
+    "en": "Peach",
+    "es": "Melocotón"
+   },
+   "k": 190,
+   "p": 20,
+   "na": 0,
+   "pr": 0.9,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "cherry",
+   "g": "fruit",
+   "n": {
+    "ar": "كرز (حب الملوك)",
+    "fr": "Cerise",
+    "en": "Cherry",
+    "es": "Cereza"
+   },
+   "k": 222,
+   "p": 21,
+   "na": 0,
+   "pr": 1.1,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "banana",
+   "g": "fruit",
+   "n": {
+    "ar": "موز",
+    "fr": "Banane",
+    "en": "Banana",
+    "es": "Plátano"
+   },
+   "k": 358,
+   "p": 22,
+   "na": 1,
+   "pr": 1.1,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "dates",
+   "g": "fruit",
+   "n": {
+    "ar": "تمر (دقلة نور)",
+    "fr": "Dattes (Deglet Nour)",
+    "en": "Dates (Deglet Noor)",
+    "es": "Dátiles (Deglet Nour)"
+   },
+   "k": 656,
+   "p": 62,
+   "na": 2,
+   "pr": 2.5,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "dried_apricot",
+   "g": "fruit",
+   "n": {
+    "ar": "مشمش مجفف",
+    "fr": "Abricot sec",
+    "en": "Dried apricot",
+    "es": "Orejón (albaricoque seco)"
+   },
+   "k": 1162,
+   "p": 71,
+   "na": 10,
+   "pr": 3.4,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "dried_fig",
+   "g": "fruit",
+   "n": {
+    "ar": "تين مجفف (كرموس)",
+    "fr": "Figue sèche",
+    "en": "Dried fig",
+    "es": "Higo seco"
+   },
+   "k": 680,
+   "p": 67,
+   "na": 10,
+   "pr": 3.3,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "fresh_fig",
+   "g": "fruit",
+   "n": {
+    "ar": "تين طازج (كرموس)",
+    "fr": "Figue fraîche",
+    "en": "Fresh fig",
+    "es": "Higo fresco"
+   },
+   "k": 232,
+   "p": 14,
+   "na": 1,
+   "pr": 0.8,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "pomegranate",
+   "g": "fruit",
+   "n": {
+    "ar": "رمان",
+    "fr": "Grenade",
+    "en": "Pomegranate",
+    "es": "Granada"
+   },
+   "k": 236,
+   "p": 36,
+   "na": 3,
+   "pr": 1.7,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "orange_juice",
+   "g": "drink",
+   "n": {
+    "ar": "عصير برتقال",
+    "fr": "Jus d'orange",
+    "en": "Orange juice",
+    "es": "Zumo de naranja"
+   },
+   "k": 200,
+   "p": 17,
+   "na": 1,
+   "pr": 0.7,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "cucumber",
+   "g": "vegetable",
+   "n": {
+    "ar": "خيار",
+    "fr": "Concombre",
+    "en": "Cucumber",
+    "es": "Pepino"
+   },
+   "k": 147,
+   "p": 24,
+   "na": 2,
+   "pr": 0.7,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "lettuce",
+   "g": "vegetable",
+   "n": {
+    "ar": "خس",
+    "fr": "Laitue",
+    "en": "Lettuce",
+    "es": "Lechuga"
+   },
+   "k": 141,
+   "p": 20,
+   "na": 10,
+   "pr": 0.9,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "cabbage",
+   "g": "vegetable",
+   "n": {
+    "ar": "كرنب (ملفوف)",
+    "fr": "Chou",
+    "en": "Cabbage",
+    "es": "Repollo"
+   },
+   "k": 170,
+   "p": 26,
+   "na": 18,
+   "pr": 1.3,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "onion",
+   "g": "vegetable",
+   "n": {
+    "ar": "بصل",
+    "fr": "Oignon",
+    "en": "Onion",
+    "es": "Cebolla"
+   },
+   "k": 146,
+   "p": 29,
+   "na": 4,
+   "pr": 1.1,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "green_pepper",
+   "g": "vegetable",
+   "n": {
+    "ar": "فلفل أخضر",
+    "fr": "Poivron vert",
+    "en": "Green pepper",
+    "es": "Pimiento verde"
+   },
+   "k": 175,
+   "p": 20,
+   "na": 3,
+   "pr": 0.9,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "green_beans",
+   "g": "vegetable",
+   "n": {
+    "ar": "لوبيا خضراء",
+    "fr": "Haricots verts",
+    "en": "Green beans",
+    "es": "Judías verdes"
+   },
+   "k": 211,
+   "p": 38,
+   "na": 6,
+   "pr": 1.8,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "eggplant",
+   "g": "vegetable",
+   "n": {
+    "ar": "باذنجان (بادنجال)",
+    "fr": "Aubergine",
+    "en": "Eggplant",
+    "es": "Berenjena"
+   },
+   "k": 229,
+   "p": 24,
+   "na": 2,
+   "pr": 1.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "zucchini",
+   "g": "vegetable",
+   "n": {
+    "ar": "كوسة (قرعة)",
+    "fr": "Courgette",
+    "en": "Zucchini",
+    "es": "Calabacín"
+   },
+   "k": 261,
+   "p": 38,
+   "na": 8,
+   "pr": 1.2,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "tomato",
+   "g": "vegetable",
+   "n": {
+    "ar": "طماطم",
+    "fr": "Tomate",
+    "en": "Tomato",
+    "es": "Tomate"
+   },
+   "k": 237,
+   "p": 24,
+   "na": 5,
+   "pr": 0.9,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "cauliflower",
+   "g": "vegetable",
+   "n": {
+    "ar": "قرنبيط (شيفلور)",
+    "fr": "Chou-fleur",
+    "en": "Cauliflower",
+    "es": "Coliflor"
+   },
+   "k": 299,
+   "p": 44,
+   "na": 30,
+   "pr": 1.9,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "carrot",
+   "g": "vegetable",
+   "n": {
+    "ar": "جزر",
+    "fr": "Carotte",
+    "en": "Carrot",
+    "es": "Zanahoria"
+   },
+   "k": 320,
+   "p": 35,
+   "na": 69,
+   "pr": 0.9,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "potato",
+   "g": "vegetable",
+   "n": {
+    "ar": "بطاطا",
+    "fr": "Pomme de terre",
+    "en": "Potato",
+    "es": "Patata"
+   },
+   "k": 425,
+   "p": 57,
+   "na": 6,
+   "pr": 2.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "potato_soaked",
+   "g": "vegetable",
+   "n": {
+    "ar": "بطاطا منقوعة ومسلوقة مرتين",
+    "fr": "Pomme de terre trempée et bouillie deux fois",
+    "en": "Potato, soaked and double-boiled",
+    "es": "Patata remojada y hervida dos veces"
+   },
+   "k": 230,
+   "p": 40,
+   "na": 5,
+   "pr": 1.7,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "spinach",
+   "g": "vegetable",
+   "n": {
+    "ar": "سبانخ",
+    "fr": "Épinards",
+    "en": "Spinach",
+    "es": "Espinacas"
+   },
+   "k": 558,
+   "p": 49,
+   "na": 79,
+   "pr": 2.9,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "artichoke",
+   "g": "vegetable",
+   "n": {
+    "ar": "خرشف (قرنون)",
+    "fr": "Artichaut",
+    "en": "Artichoke",
+    "es": "Alcachofa"
+   },
+   "k": 370,
+   "p": 90,
+   "na": 94,
+   "pr": 3.3,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "tomato_paste",
+   "g": "condiment",
+   "n": {
+    "ar": "معجون الطماطم (الطماطم المصبرة)",
+    "fr": "Concentré de tomate",
+    "en": "Tomato paste",
+    "es": "Concentrado de tomate"
+   },
+   "k": 1014,
+   "p": 83,
+   "na": 59,
+   "pr": 4.3,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "white_rice",
+   "g": "starch",
+   "n": {
+    "ar": "أرز أبيض مطبوخ",
+    "fr": "Riz blanc cuit",
+    "en": "White rice, cooked",
+    "es": "Arroz blanco cocido"
+   },
+   "k": 35,
+   "p": 43,
+   "na": 1,
+   "pr": 2.7,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "pasta",
+   "g": "starch",
+   "n": {
+    "ar": "معكرونة مطبوخة",
+    "fr": "Pâtes cuites",
+    "en": "Pasta, cooked",
+    "es": "Pasta cocida"
+   },
+   "k": 44,
+   "p": 58,
+   "na": 1,
+   "pr": 5.8,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "couscous",
+   "g": "starch",
+   "n": {
+    "ar": "كسكس مطبوخ",
+    "fr": "Couscous cuit",
+    "en": "Couscous, cooked",
+    "es": "Cuscús cocido"
+   },
+   "k": 58,
+   "p": 22,
+   "na": 5,
+   "pr": 3.8,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "baguette",
+   "g": "starch",
+   "n": {
+    "ar": "خبز أبيض (باقيت)",
+    "fr": "Baguette",
+    "en": "White bread (baguette)",
+    "es": "Pan blanco (baguette)"
+   },
+   "k": 117,
+   "p": 98,
+   "na": 490,
+   "pr": 9.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "wholemeal_bread",
+   "g": "starch",
+   "n": {
+    "ar": "خبز كامل",
+    "fr": "Pain complet",
+    "en": "Wholemeal bread",
+    "es": "Pan integral"
+   },
+   "k": 250,
+   "p": 212,
+   "na": 450,
+   "pr": 13.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "kesra",
+   "g": "starch",
+   "n": {
+    "ar": "كسرة (خبز الدار بالسميد)",
+    "fr": "Galette kesra",
+    "en": "Kesra (semolina flatbread)",
+    "es": "Kesra (torta de sémola)"
+   },
+   "k": 150,
+   "p": 110,
+   "na": 400,
+   "pr": 8.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "oats",
+   "g": "starch",
+   "n": {
+    "ar": "شوفان",
+    "fr": "Flocons d'avoine",
+    "en": "Oats",
+    "es": "Copos de avena"
+   },
+   "k": 429,
+   "p": 523,
+   "na": 6,
+   "pr": 16.9,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "chicken",
+   "g": "protein",
+   "n": {
+    "ar": "دجاج (صدر مطبوخ)",
+    "fr": "Poulet (blanc cuit)",
+    "en": "Chicken breast, cooked",
+    "es": "Pechuga de pollo cocida"
+   },
+   "k": 256,
+   "p": 228,
+   "na": 74,
+   "pr": 31.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "beef",
+   "g": "protein",
+   "n": {
+    "ar": "لحم بقري مطبوخ",
+    "fr": "Bœuf cuit",
+    "en": "Beef, cooked",
+    "es": "Ternera cocida"
+   },
+   "k": 318,
+   "p": 200,
+   "na": 72,
+   "pr": 26.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "lamb",
+   "g": "protein",
+   "n": {
+    "ar": "لحم غنم مطبوخ",
+    "fr": "Agneau cuit",
+    "en": "Lamb, cooked",
+    "es": "Cordero cocido"
+   },
+   "k": 310,
+   "p": 190,
+   "na": 72,
+   "pr": 25.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "white_fish",
+   "g": "protein",
+   "n": {
+    "ar": "سمك أبيض مطبوخ",
+    "fr": "Poisson blanc cuit",
+    "en": "White fish, cooked",
+    "es": "Pescado blanco cocido"
+   },
+   "k": 244,
+   "p": 138,
+   "na": 78,
+   "pr": 23.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "sardines_canned",
+   "g": "protein",
+   "n": {
+    "ar": "سردين معلب",
+    "fr": "Sardines en boîte",
+    "en": "Canned sardines",
+    "es": "Sardinas en lata"
+   },
+   "k": 397,
+   "p": 490,
+   "na": 307,
+   "pr": 24.6,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "tuna_canned",
+   "g": "protein",
+   "n": {
+    "ar": "تونة معلبة",
+    "fr": "Thon en boîte",
+    "en": "Canned tuna",
+    "es": "Atún en lata"
+   },
+   "k": 237,
+   "p": 217,
+   "na": 250,
+   "pr": 25.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "egg",
+   "g": "protein",
+   "n": {
+    "ar": "بيضة كاملة",
+    "fr": "Œuf entier",
+    "en": "Whole egg",
+    "es": "Huevo entero"
+   },
+   "k": 138,
+   "p": 198,
+   "na": 142,
+   "pr": 12.6,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "egg_white",
+   "g": "protein",
+   "n": {
+    "ar": "بياض البيض",
+    "fr": "Blanc d'œuf",
+    "en": "Egg white",
+    "es": "Clara de huevo"
+   },
+   "k": 163,
+   "p": 15,
+   "na": 166,
+   "pr": 10.9,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "merguez",
+   "g": "processed",
+   "n": {
+    "ar": "مرقاز",
+    "fr": "Merguez",
+    "en": "Merguez sausage",
+    "es": "Salchicha merguez"
+   },
+   "k": 280,
+   "p": 160,
+   "na": 900,
+   "pr": 16.0,
+   "add": true,
+   "water": false
+  },
+  {
+   "id": "cachir",
+   "g": "processed",
+   "n": {
+    "ar": "كاشير (لحم مصنع)",
+    "fr": "Cachir / pâté de viande",
+    "en": "Processed meat (cachir)",
+    "es": "Fiambre (cachir)"
+   },
+   "k": 220,
+   "p": 300,
+   "na": 1100,
+   "pr": 12.0,
+   "add": true,
+   "water": false
+  },
+  {
+   "id": "milk",
+   "g": "dairy",
+   "n": {
+    "ar": "حليب",
+    "fr": "Lait",
+    "en": "Milk",
+    "es": "Leche"
+   },
+   "k": 132,
+   "p": 84,
+   "na": 43,
+   "pr": 3.2,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "yogurt",
+   "g": "dairy",
+   "n": {
+    "ar": "ياغورت",
+    "fr": "Yaourt nature",
+    "en": "Plain yogurt",
+    "es": "Yogur natural"
+   },
+   "k": 155,
+   "p": 135,
+   "na": 46,
+   "pr": 3.5,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "lben",
+   "g": "dairy",
+   "n": {
+    "ar": "لبن",
+    "fr": "Lben (lait fermenté)",
+    "en": "Lben (fermented milk)",
+    "es": "Lben (leche fermentada)"
+   },
+   "k": 150,
+   "p": 90,
+   "na": 50,
+   "pr": 3.3,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "processed_cheese",
+   "g": "processed",
+   "n": {
+    "ar": "جبن مطبوخ (أجزاء)",
+    "fr": "Fromage fondu en portions",
+    "en": "Processed cheese portions",
+    "es": "Quesitos fundidos"
+   },
+   "k": 180,
+   "p": 750,
+   "na": 1200,
+   "pr": 10.0,
+   "add": true,
+   "water": false
+  },
+  {
+   "id": "camembert",
+   "g": "dairy",
+   "n": {
+    "ar": "جبن كامومبير",
+    "fr": "Camembert",
+    "en": "Camembert",
+    "es": "Camembert"
+   },
+   "k": 187,
+   "p": 347,
+   "na": 842,
+   "pr": 19.8,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "butter",
+   "g": "dairy",
+   "n": {
+    "ar": "زبدة غير مملحة",
+    "fr": "Beurre doux",
+    "en": "Unsalted butter",
+    "es": "Mantequilla sin sal"
+   },
+   "k": 24,
+   "p": 24,
+   "na": 11,
+   "pr": 0.9,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "chickpeas",
+   "g": "legume",
+   "n": {
+    "ar": "حمص مطبوخ",
+    "fr": "Pois chiches cuits",
+    "en": "Chickpeas, cooked",
+    "es": "Garbanzos cocidos"
+   },
+   "k": 291,
+   "p": 168,
+   "na": 7,
+   "pr": 8.9,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "lentils",
+   "g": "legume",
+   "n": {
+    "ar": "عدس مطبوخ",
+    "fr": "Lentilles cuites",
+    "en": "Lentils, cooked",
+    "es": "Lentejas cocidas"
+   },
+   "k": 369,
+   "p": 180,
+   "na": 2,
+   "pr": 9.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "white_beans",
+   "g": "legume",
+   "n": {
+    "ar": "لوبيا بيضاء مطبوخة",
+    "fr": "Haricots blancs cuits",
+    "en": "White beans, cooked",
+    "es": "Alubias blancas cocidas"
+   },
+   "k": 561,
+   "p": 169,
+   "na": 6,
+   "pr": 9.7,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "broad_beans",
+   "g": "legume",
+   "n": {
+    "ar": "فول مطبوخ",
+    "fr": "Fèves cuites",
+    "en": "Broad beans, cooked",
+    "es": "Habas cocidas"
+   },
+   "k": 268,
+   "p": 125,
+   "na": 5,
+   "pr": 7.6,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "almonds",
+   "g": "nuts",
+   "n": {
+    "ar": "لوز",
+    "fr": "Amandes",
+    "en": "Almonds",
+    "es": "Almendras"
+   },
+   "k": 733,
+   "p": 481,
+   "na": 1,
+   "pr": 21.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "peanuts",
+   "g": "nuts",
+   "n": {
+    "ar": "كاوكاو (فول سوداني)",
+    "fr": "Cacahuètes",
+    "en": "Peanuts",
+    "es": "Cacahuetes"
+   },
+   "k": 705,
+   "p": 376,
+   "na": 18,
+   "pr": 26.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "dark_chocolate",
+   "g": "nuts",
+   "n": {
+    "ar": "شوكولاتة داكنة",
+    "fr": "Chocolat noir",
+    "en": "Dark chocolate",
+    "es": "Chocolate negro"
+   },
+   "k": 715,
+   "p": 308,
+   "na": 20,
+   "pr": 7.8,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "honey",
+   "g": "nuts",
+   "n": {
+    "ar": "عسل",
+    "fr": "Miel",
+    "en": "Honey",
+    "es": "Miel"
+   },
+   "k": 52,
+   "p": 4,
+   "na": 4,
+   "pr": 0.3,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "sugar",
+   "g": "nuts",
+   "n": {
+    "ar": "سكر",
+    "fr": "Sucre",
+    "en": "Sugar",
+    "es": "Azúcar"
+   },
+   "k": 2,
+   "p": 0,
+   "na": 1,
+   "pr": 0.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "water",
+   "g": "drink",
+   "n": {
+    "ar": "ماء",
+    "fr": "Eau",
+    "en": "Water",
+    "es": "Agua"
+   },
+   "k": 0,
+   "p": 0,
+   "na": 2,
+   "pr": 0.0,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "tea",
+   "g": "drink",
+   "n": {
+    "ar": "شاي",
+    "fr": "Thé",
+    "en": "Tea",
+    "es": "Té"
+   },
+   "k": 37,
+   "p": 1,
+   "na": 3,
+   "pr": 0.0,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "coffee",
+   "g": "drink",
+   "n": {
+    "ar": "قهوة",
+    "fr": "Café",
+    "en": "Coffee",
+    "es": "Café"
+   },
+   "k": 49,
+   "p": 3,
+   "na": 2,
+   "pr": 0.1,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "cola",
+   "g": "drink",
+   "n": {
+    "ar": "مشروب كولا",
+    "fr": "Soda au cola",
+    "en": "Cola soft drink",
+    "es": "Refresco de cola"
+   },
+   "k": 2,
+   "p": 10,
+   "na": 4,
+   "pr": 0.0,
+   "add": true,
+   "water": true
+  },
+  {
+   "id": "sparkling_water",
+   "g": "drink",
+   "n": {
+    "ar": "مياه غازية معدنية (حسب النوع)",
+    "fr": "Eau gazeuse minérale (selon la marque)",
+    "en": "Sparkling mineral water (varies)",
+    "es": "Agua mineral con gas (según marca)"
+   },
+   "k": 1,
+   "p": 0,
+   "na": 100,
+   "pr": 0.0,
+   "add": false,
+   "water": true
+  },
+  {
+   "id": "salt",
+   "g": "condiment",
+   "n": {
+    "ar": "ملح الطعام",
+    "fr": "Sel de table",
+    "en": "Table salt",
+    "es": "Sal de mesa"
+   },
+   "k": 8,
+   "p": 0,
+   "na": 38758,
+   "pr": 0.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "stock_cube",
+   "g": "condiment",
+   "n": {
+    "ar": "مكعب المرق",
+    "fr": "Bouillon cube",
+    "en": "Stock cube",
+    "es": "Pastilla de caldo"
+   },
+   "k": 300,
+   "p": 150,
+   "na": 20000,
+   "pr": 10.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "harissa",
+   "g": "condiment",
+   "n": {
+    "ar": "هريسة",
+    "fr": "Harissa",
+    "en": "Harissa",
+    "es": "Harissa"
+   },
+   "k": 550,
+   "p": 70,
+   "na": 2500,
+   "pr": 3.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "olives",
+   "g": "condiment",
+   "n": {
+    "ar": "زيتون مصبر",
+    "fr": "Olives en saumure",
+    "en": "Brined olives",
+    "es": "Aceitunas en salmuera"
+   },
+   "k": 42,
+   "p": 4,
+   "na": 1556,
+   "pr": 1.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "olive_oil",
+   "g": "condiment",
+   "n": {
+    "ar": "زيت الزيتون",
+    "fr": "Huile d'olive",
+    "en": "Olive oil",
+    "es": "Aceite de oliva"
+   },
+   "k": 1,
+   "p": 0,
+   "na": 2,
+   "pr": 0.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "salt_substitute",
+   "g": "condiment",
+   "n": {
+    "ar": "بديل الملح (كلوريد البوتاسيوم) – ممنوع",
+    "fr": "Sel de régime au potassium – à éviter",
+    "en": "Potassium salt substitute – avoid",
+    "es": "Sustituto de sal con potasio – evitar"
+   },
+   "k": 50000,
+   "p": 0,
+   "na": 0,
+   "pr": 0.0,
+   "add": false,
+   "water": false
+  },
+  {
+   "id": "chips",
+   "g": "processed",
+   "n": {
+    "ar": "شيبس بطاطا",
+    "fr": "Chips",
+    "en": "Potato crisps",
+    "es": "Patatas fritas de bolsa"
+   },
+   "k": 1200,
+   "p": 150,
+   "na": 500,
+   "pr": 6.5,
+   "add": false,
+   "water": false
+  }
+ ],
+ "dishes": [
+  {
+   "id": "chorba",
+   "k": "M",
+   "p": "M",
+   "na": "H",
+   "fl": "H",
+   "n": {
+    "ar": "شربة فريك",
+    "fr": "Chorba frik",
+    "en": "Chorba frik (soup)",
+    "es": "Chorba frik (sopa)"
+   },
+   "tip": {
+    "ar": "الشربة سائل يُحسب ضمن كمية السوائل، والطماطم المركزة والحمص يرفعان البوتاسيوم. اكتفِ بنصف صحن صغير، وقلّل الملح ومكعب المرق، وضع قليلاً من الحمص.",
+    "fr": "La chorba est un liquide qui compte dans votre quota, et le concentré de tomate et les pois chiches apportent du potassium. Contentez-vous d'un petit demi-bol, réduisez le sel et le bouillon cube, peu de pois chiches.",
+    "en": "Chorba is a liquid that counts towards your fluids, and tomato paste and chickpeas add potassium. Have a small half bowl, cut salt and stock cubes, and use few chickpeas.",
+    "es": "La chorba es líquida y cuenta en sus líquidos; el concentrado de tomate y los garbanzos aportan potasio. Tome medio cuenco pequeño, reduzca la sal y el caldo en pastilla y ponga pocos garbanzos."
+   }
+  },
+  {
+   "id": "couscous_veg",
+   "k": "M",
+   "p": "M",
+   "na": "M",
+   "fl": "M",
+   "n": {
+    "ar": "كسكس بالخضر واللحم",
+    "fr": "Couscous aux légumes et à la viande",
+    "en": "Couscous with vegetables and meat",
+    "es": "Cuscús con verduras y carne"
+   },
+   "tip": {
+    "ar": "الكسكس نفسه قليل البوتاسيوم. اختر القرعة والجزر واللفت بكمية معتدلة، وقلّل البطاطا والحمص، وصفِّ المرق ولا تكثر منه.",
+    "fr": "La semoule elle-même est pauvre en potassium. Préférez courgette, carotte et navet en quantité modérée, limitez pomme de terre et pois chiches, et prenez peu de sauce.",
+    "en": "The semolina itself is low in potassium. Choose courgette, carrot and turnip in moderate amounts, limit potato and chickpeas, and take little broth.",
+    "es": "La sémola en sí tiene poco potasio. Elija calabacín, zanahoria y nabo con moderación, limite la patata y los garbanzos y tome poco caldo."
+   }
+  },
+  {
+   "id": "rechta",
+   "k": "M",
+   "p": "M",
+   "na": "M",
+   "fl": "M",
+   "n": {
+    "ar": "رشتة",
+    "fr": "Rechta",
+    "en": "Rechta (noodles with chicken)",
+    "es": "Rechta (fideos con pollo)"
+   },
+   "tip": {
+    "ar": "العجين قليل البوتاسيوم، والدجاج بروتين جيد. انتبه للمرق (سوائل) وللحمص واللفت، واكتفِ بقليل من المرق.",
+    "fr": "Les pâtes sont pauvres en potassium et le poulet est une bonne protéine. Attention à la sauce (liquide), aux pois chiches et aux navets : peu de sauce.",
+    "en": "The noodles are low in potassium and chicken is good protein. Watch the broth (fluid), chickpeas and turnips: take little broth.",
+    "es": "Los fideos tienen poco potasio y el pollo es buena proteína. Cuidado con el caldo (líquido), los garbanzos y el nabo: poco caldo."
+   }
+  },
+  {
+   "id": "chakhchoukha",
+   "k": "M",
+   "p": "M",
+   "na": "H",
+   "fl": "M",
+   "n": {
+    "ar": "شخشوخة",
+    "fr": "Chakhchoukha",
+    "en": "Chakhchoukha",
+    "es": "Chakhchoukha"
+   },
+   "tip": {
+    "ar": "المرق غني بالطماطم والتوابل والملح. خذ حصة صغيرة مع قليل من المرق وتجنب إضافة الملح.",
+    "fr": "La sauce est riche en tomate, épices et sel. Petite portion, peu de sauce, sans sel ajouté.",
+    "en": "The sauce is rich in tomato, spices and salt. Small portion, little sauce, no added salt.",
+    "es": "La salsa es rica en tomate, especias y sal. Porción pequeña, poca salsa y sin sal añadida."
+   }
+  },
+  {
+   "id": "loubia",
+   "k": "H",
+   "p": "H",
+   "na": "M",
+   "fl": "M",
+   "n": {
+    "ar": "لوبيا (فاصولياء بيضاء بالمرق)",
+    "fr": "Loubia (haricots blancs en sauce)",
+    "en": "Loubia (white bean stew)",
+    "es": "Loubia (guiso de alubias)"
+   },
+   "tip": {
+    "ar": "اللوبيا البيضاء غنية جداً بالبوتاسيوم والفوسفور. نادراً وبكمية صغيرة: انقعها طويلاً وغيّر الماء واسكب ماء الطهي الأول.",
+    "fr": "Les haricots blancs sont très riches en potassium et en phosphore. Rarement et en petite quantité : trempage long, changez l'eau et jetez la première eau de cuisson.",
+    "en": "White beans are very rich in potassium and phosphorus. Rarely and in small amounts: soak for a long time, change the water and discard the first cooking water.",
+    "es": "Las alubias blancas son muy ricas en potasio y fósforo. Rara vez y en poca cantidad: remojo largo, cambie el agua y tire la primera agua de cocción."
+   }
+  },
+  {
+   "id": "lentils_dish",
+   "k": "H",
+   "p": "H",
+   "na": "M",
+   "fl": "M",
+   "n": {
+    "ar": "عدس بالمرق",
+    "fr": "Lentilles en sauce",
+    "en": "Lentil stew",
+    "es": "Lentejas guisadas"
+   },
+   "tip": {
+    "ar": "العدس غني بالبوتاسيوم والفوسفور. كمية صغيرة كبديل عن اللحم وليس معه، وبعد النقع.",
+    "fr": "Les lentilles sont riches en potassium et phosphore. Petite portion, à la place de la viande et non en plus, après trempage.",
+    "en": "Lentils are rich in potassium and phosphorus. Small portion, instead of meat rather than with it, after soaking.",
+    "es": "Las lentejas son ricas en potasio y fósforo. Porción pequeña, en lugar de la carne y no además, tras remojarlas."
+   }
+  },
+  {
+   "id": "dolma",
+   "k": "M",
+   "p": "M",
+   "na": "M",
+   "fl": "L",
+   "n": {
+    "ar": "دولمة",
+    "fr": "Dolma (légumes farcis)",
+    "en": "Dolma (stuffed vegetables)",
+    "es": "Dolma (verduras rellenas)"
+   },
+   "tip": {
+    "ar": "القرعة والفلفل المحشوة بالأرز واللحم خيار معتدل. قلّل المرق والملح.",
+    "fr": "Courgettes et poivrons farcis au riz et à la viande : choix modéré. Peu de sauce et de sel.",
+    "en": "Courgettes and peppers stuffed with rice and meat are a moderate choice. Little sauce and salt.",
+    "es": "Calabacines y pimientos rellenos de arroz y carne: opción moderada. Poca salsa y poca sal."
+   }
+  },
+  {
+   "id": "tajine_zitoune",
+   "k": "M",
+   "p": "M",
+   "na": "H",
+   "fl": "L",
+   "n": {
+    "ar": "طاجين الزيتون",
+    "fr": "Tajine zitoune (aux olives)",
+    "en": "Tajine zitoune (chicken with olives)",
+    "es": "Tajín zitoune (pollo con aceitunas)"
+   },
+   "tip": {
+    "ar": "الزيتون المصبر مالح جداً. انقعه في الماء وغيّره عدة مرات، أو قلّل عدده كثيراً.",
+    "fr": "Les olives en saumure sont très salées. Faites-les tremper en changeant l'eau plusieurs fois, ou mettez-en beaucoup moins.",
+    "en": "Brined olives are very salty. Soak them, changing the water several times, or use far fewer.",
+    "es": "Las aceitunas en salmuera son muy saladas. Remójelas cambiando el agua varias veces o ponga muchas menos."
+   }
+  },
+  {
+   "id": "lham_lahlou",
+   "k": "H",
+   "p": "M",
+   "na": "L",
+   "fl": "L",
+   "n": {
+    "ar": "لحم لحلو",
+    "fr": "Lham lahlou (viande sucrée aux pruneaux)",
+    "en": "Lham lahlou (sweet meat with prunes)",
+    "es": "Lham lahlou (carne dulce con ciruelas)"
+   },
+   "tip": {
+    "ar": "البرقوق والمشمش المجفف والزبيب غنية جداً بالبوتاسيوم. بضع ملاعق فقط في المناسبات، ومراقبة السكر لمرضى السكري.",
+    "fr": "Pruneaux, abricots secs et raisins secs sont très riches en potassium. Quelques cuillerées seulement lors des fêtes ; attention au sucre en cas de diabète.",
+    "en": "Prunes, dried apricots and raisins are very high in potassium. Just a few spoonfuls on special occasions; watch the sugar if diabetic.",
+    "es": "Las ciruelas pasas, los orejones y las pasas son muy ricos en potasio. Solo unas cucharadas en fiestas; cuidado con el azúcar si es diabético."
+   }
+  },
+  {
+   "id": "bourek",
+   "k": "M",
+   "p": "M",
+   "na": "H",
+   "fl": "L",
+   "n": {
+    "ar": "بوراك",
+    "fr": "Bourek",
+    "en": "Bourek",
+    "es": "Bourek"
+   },
+   "tip": {
+    "ar": "الحشوة باللحم والبيض مقبولة، لكن الجبن المطبوخ والزيتون يرفعان الملح والفوسفور. واحد أو اثنان فقط.",
+    "fr": "La farce viande-œuf est acceptable, mais fromage fondu et olives ajoutent sel et phosphore. Un ou deux seulement.",
+    "en": "A meat and egg filling is fine, but processed cheese and olives add salt and phosphorus. Only one or two.",
+    "es": "El relleno de carne y huevo está bien, pero el queso fundido y las aceitunas añaden sal y fósforo. Solo uno o dos."
+   }
+  },
+  {
+   "id": "garantita",
+   "k": "M",
+   "p": "M",
+   "na": "H",
+   "fl": "L",
+   "n": {
+    "ar": "قرنطيطة (كرانتيكا)",
+    "fr": "Garantita (karantika)",
+    "en": "Garantita (chickpea flour flan)",
+    "es": "Garantita (flan de harina de garbanzo)"
+   },
+   "tip": {
+    "ar": "مصنوعة من دقيق الحمص وغالباً مع الكمون والملح والهريسة. قطعة صغيرة دون هريسة ولا ملح إضافي.",
+    "fr": "À base de farine de pois chiches, souvent salée et servie avec harissa. Petite part, sans harissa ni sel ajouté.",
+    "en": "Made from chickpea flour, often salty and served with harissa. A small piece, without harissa or extra salt.",
+    "es": "Hecha con harina de garbanzo, suele ser salada y servirse con harissa. Un trozo pequeño, sin harissa ni sal extra."
+   }
+  },
+  {
+   "id": "mhadjeb",
+   "k": "M",
+   "p": "L",
+   "na": "M",
+   "fl": "L",
+   "n": {
+    "ar": "محاجب",
+    "fr": "Mhadjeb",
+    "en": "Mhadjeb (stuffed flatbread)",
+    "es": "Mhadjeb (crepe rellena)"
+   },
+   "tip": {
+    "ar": "حشوة الطماطم والبصل معتدلة. لا تضف الهريسة والملح، وواحدة تكفي.",
+    "fr": "La farce tomate-oignon est modérée. Sans harissa ni sel ajouté ; une seule suffit.",
+    "en": "The tomato and onion filling is moderate. No harissa or added salt; one is enough.",
+    "es": "El relleno de tomate y cebolla es moderado. Sin harissa ni sal añadida; con uno basta."
+   }
+  },
+  {
+   "id": "chtitha",
+   "k": "M",
+   "p": "M",
+   "na": "H",
+   "fl": "M",
+   "n": {
+    "ar": "شطيطحة لحم أو دجاج",
+    "fr": "Chtitha (viande ou poulet en sauce piquante)",
+    "en": "Chtitha (spicy meat or chicken stew)",
+    "es": "Chtitha (guiso picante de carne o pollo)"
+   },
+   "tip": {
+    "ar": "الصلصة الحارة غنية بالهريسة والطماطم والملح. خذ اللحم مع قليل من الصلصة.",
+    "fr": "La sauce piquante contient harissa, tomate et sel. Prenez la viande avec peu de sauce.",
+    "en": "The spicy sauce contains harissa, tomato and salt. Take the meat with little sauce.",
+    "es": "La salsa picante lleva harissa, tomate y sal. Tome la carne con poca salsa."
+   }
+  },
+  {
+   "id": "makrout",
+   "k": "H",
+   "p": "M",
+   "na": "L",
+   "fl": "L",
+   "n": {
+    "ar": "مقروط",
+    "fr": "Makrout",
+    "en": "Makrout (date-filled semolina cake)",
+    "es": "Makrout (pastel de sémola con dátiles)"
+   },
+   "tip": {
+    "ar": "معجون التمر غني بالبوتاسيوم، والعسل يرفع السكر. قطعة واحدة في المناسبات.",
+    "fr": "La pâte de dattes est riche en potassium et le miel en sucre. Un seul morceau pour les fêtes.",
+    "en": "Date paste is rich in potassium and the honey adds sugar. One piece on special occasions.",
+    "es": "La pasta de dátiles es rica en potasio y la miel en azúcar. Un solo trozo en fiestas."
+   }
+  },
+  {
+   "id": "zlabia",
+   "k": "L",
+   "p": "L",
+   "na": "L",
+   "fl": "L",
+   "n": {
+    "ar": "زلابية",
+    "fr": "Zlabia",
+    "en": "Zlabia (fried syrup sweet)",
+    "es": "Zlabia (dulce frito en almíbar)"
+   },
+   "tip": {
+    "ar": "قليلة البوتاسيوم والفوسفور لكنها غنية جداً بالسكر والدهون. تجنبها في حالة السكري، وبكمية صغيرة لغيرهم.",
+    "fr": "Peu de potassium et de phosphore, mais très sucrée et grasse. À éviter en cas de diabète, en petite quantité sinon.",
+    "en": "Low in potassium and phosphorus but very sugary and fatty. Avoid with diabetes, otherwise a small amount.",
+    "es": "Poco potasio y fósforo, pero muy dulce y grasa. Evítela si es diabético; si no, en poca cantidad."
+   }
+  },
+  {
+   "id": "hmiss",
+   "k": "H",
+   "p": "L",
+   "na": "M",
+   "fl": "L",
+   "n": {
+    "ar": "حميس (سلطة الفلفل والطماطم المشوية)",
+    "fr": "Hmiss (salade de poivrons et tomates grillés)",
+    "en": "Hmiss (grilled pepper and tomato salad)",
+    "es": "Hmiss (ensalada de pimientos y tomates asados)"
+   },
+   "tip": {
+    "ar": "الطماطم المشوية والمركزة غنية بالبوتاسيوم. ملعقتان فقط، مع الخبز الأبيض.",
+    "fr": "Les tomates grillées et réduites sont riches en potassium. Deux cuillerées seulement, avec du pain blanc.",
+    "en": "Grilled, reduced tomatoes are rich in potassium. Just two spoonfuls, with white bread.",
+    "es": "Los tomates asados y reducidos son ricos en potasio. Solo dos cucharadas, con pan blanco."
+   }
+  },
+  {
+   "id": "berkoukes",
+   "k": "M",
+   "p": "M",
+   "na": "M",
+   "fl": "H",
+   "n": {
+    "ar": "بركوكس",
+    "fr": "Berkoukes",
+    "en": "Berkoukes (large couscous soup)",
+    "es": "Berkoukes (sopa de cuscús grueso)"
+   },
+   "tip": {
+    "ar": "طبق كثير المرق: احسبه ضمن السوائل، وقلّل الخضر الغنية بالبوتاسيوم والحمص.",
+    "fr": "Plat très liquide : comptez-le dans vos liquides et limitez les légumes riches en potassium et les pois chiches.",
+    "en": "A very liquid dish: count it in your fluids and limit potassium-rich vegetables and chickpeas.",
+    "es": "Plato muy líquido: cuéntelo en sus líquidos y limite las verduras ricas en potasio y los garbanzos."
+   }
+  }
+ ]
+}
