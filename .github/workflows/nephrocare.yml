@@ -33,7 +33,7 @@ jobs:
       - name: Generated strings, content and foods are up to date
         run: |
           python3 tools/build_strings.py
-          python3 tools/build_content.py || echo "TEMP: content not written yet"
+          python3 tools/build_content.py
           python3 tools/build_foods.py
           git diff --exit-code
 

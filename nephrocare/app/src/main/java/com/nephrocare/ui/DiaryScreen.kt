@@ -168,7 +168,9 @@ private fun DoctorQuestions() {
                         )
                     }
                 }
-                HistoryRow("", "", onDelete = { scope.launch { app.db.questions().delete(q) } })
+                androidx.compose.material3.TextButton(onClick = { scope.launch { app.db.questions().delete(q) } }) {
+                    Text(stringResource(R.string.delete), color = MaterialTheme.colorScheme.error)
+                }
             }
         }
     }

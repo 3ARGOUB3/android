@@ -56,7 +56,6 @@ object Cities {
         City("el_tarf", "الطارف", "El Tarf", 36.7672, 8.3137),
         City("tissemsilt", "تيسمسيلت", "Tissemsilt", 35.6072, 1.8109),
         City("ain_temouchent", "عين تموشنت", "Aïn Témouchent", 35.2975, -1.1404),
-        City("ghardaia_metlili", "متليلي", "Metlili", 32.2667, 3.6333),
         City("paris", "باريس", "Paris", 48.8566, 2.3522),
         City("lyon", "ليون", "Lyon", 45.7640, 4.8357),
         City("marseille", "مرسيليا", "Marseille", 43.2965, 5.3698),

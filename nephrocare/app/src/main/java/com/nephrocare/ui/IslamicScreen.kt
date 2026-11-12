@@ -346,5 +346,4 @@ fun SurahScreen(id: Int, back: () -> Unit) {
             item { Text(stringResource(R.string.quran_source), style = MaterialTheme.typography.bodySmall) }
         }
     }
-    LaunchedEffect(Unit) { }
 }

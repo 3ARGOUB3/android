@@ -31,3 +31,8 @@ Requires JDK 17 and the Android SDK.
 Every push runs the same build on GitHub Actions and publishes the APK as a GitHub release.
 Latest APK: https://github.com/3ARGOUB3/android/releases/latest/download/masroufi.apk
 (Android 6.0 or newer).
+
+---
+
+This repository also contains **NephroCare**, a companion app for kidney failure and dialysis
+patients, in [`nephrocare/`](nephrocare/README.md).
