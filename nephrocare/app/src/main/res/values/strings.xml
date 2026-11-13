@@ -339,6 +339,12 @@
     <string name="centers_intro">Build your own list of dialysis centers, hospitals and nephrologists. The list stays on your phone and works offline; you can then call or open the map in one tap.</string>
     <string name="centers_search">Search by name or city</string>
     <string name="centers_empty">No address yet. Tap Add to save your center, the hospital or your nephrologist.</string>
+    <string name="centers_import">Import CSV</string>
+    <string name="centers_export">Export CSV</string>
+    <string name="centers_csv_hint">A care team or association can prepare the list in a spreadsheet (columns: name, type, city, address, phone, notes) and share the CSV file. Importing adds new entries and skips those already saved.</string>
+    <string name="centers_imported">%1$d addresses imported.</string>
+    <string name="centers_exported">List exported.</string>
+    <string name="centers_csv_failed">The file could not be read or written.</string>
     <string name="center_dialysis">Dialysis center</string>
     <string name="center_hospital">Hospital</string>
     <string name="center_nephrologist">Nephrologist</string>
@@ -387,6 +393,8 @@
     <string name="settings_notifications">Notifications</string>
     <string name="settings_allow_notifications">Allow notifications</string>
     <string name="settings_exact_alarms">Allow reminders at the exact time</string>
+    <string name="settings_battery">Let reminders run with battery saving</string>
+    <string name="settings_battery_hint">On Samsung and some other phones, battery saving can delay or block reminders. Choose NephroCare and set it to “Unrestricted” or “Don\'t optimise”.</string>
     <string name="settings_notif_details">Show medicine names in notifications</string>
     <string name="settings_notif_details_hint">Off by default for privacy. The lock screen never shows health details.</string>
     <string name="settings_privacy">Privacy and data</string>

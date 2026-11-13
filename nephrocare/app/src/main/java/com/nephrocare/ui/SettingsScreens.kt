@@ -156,6 +156,17 @@ fun SettingsScreen(go: (String) -> Unit) {
                     tick++
                 }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.settings_exact_alarms)) }
             }
+            val batteryFree = remember(tick) {
+                Build.VERSION.SDK_INT < 23 ||
+                    (context.getSystemService(android.os.PowerManager::class.java)?.isIgnoringBatteryOptimizations(context.packageName) ?: true)
+            }
+            if (!batteryFree) {
+                OutlinedButton(onClick = {
+                    runCatching { context.startActivity(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)) }
+                    tick++
+                }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.settings_battery)) }
+                Text(stringResource(R.string.settings_battery_hint), style = MaterialTheme.typography.bodySmall)
+            }
             SwitchRow(stringResource(R.string.settings_notif_details), settings.notificationDetails, stringResource(R.string.settings_notif_details_hint)) { v ->
                 app.settings.updateSettings { it.copy(notificationDetails = v) }
             }

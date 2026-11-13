@@ -25,7 +25,7 @@ Poids actuel et écart au poids sec, prochaine séance, dernière tension, médi
 - **Médicaments** : nom, dose recopiée de l'ordonnance, heures ; rappels avec action « Pris », historique, informations. Aucune dose n'est jamais proposée.
 - **Prière et invocations** : horaires calculés hors ligne (villes ou coordonnées, méthodes de calcul, ajustement en minutes, rappels), adhkar du matin, du soir et après la prière avec compteur, invocations du malade, Coran complet avec traduction du sens.
 - **Encyclopédie, soutien moral, urgences** : 70 articles dans chaque langue, boutons d'appel d'urgence (14 en Algérie, 112 en Europe, votre néphrologue, votre contact).
-- **Recherche** hors ligne, **médiathèque** (illustrations, vidéos ajoutées avec sous-titres), **carnet** (symptômes, questions pour le médecin), **liquides** (quota fixé par l'équipe), **centres** (votre annuaire avec appel et carte).
+- **Recherche** hors ligne, **médiathèque** (illustrations, vidéos ajoutées avec sous-titres), **carnet** (symptômes, questions pour le médecin), **liquides** (quota fixé par l'équipe), **centres** (votre annuaire avec appel et carte, import/export CSV pour partager une liste préparée par une association : modèle `docs/centres-template.csv`).
 - **Rapports PDF** : période et contenu au choix, à ouvrir, envoyer au médecin ou enregistrer.
 
 ## 5. Réglages et confidentialité

@@ -339,6 +339,12 @@
     <string name="centers_intro">Cree su propia lista de centros de diálisis, hospitales y nefrólogos. Se guarda en el teléfono, funciona sin conexión y permite llamar o abrir el mapa con un toque.</string>
     <string name="centers_search">Buscar por nombre o ciudad</string>
     <string name="centers_empty">Aún no hay direcciones. Toque Añadir para guardar su centro, el hospital o su nefrólogo.</string>
+    <string name="centers_import">Importar CSV</string>
+    <string name="centers_export">Exportar CSV</string>
+    <string name="centers_csv_hint">Un equipo sanitario o una asociación puede preparar la lista en una hoja de cálculo (columnas: nombre, tipo, ciudad, dirección, teléfono, notas) y compartir el archivo CSV. Al importar se añaden las nuevas y se omiten las ya guardadas.</string>
+    <string name="centers_imported">%1$d direcciones importadas.</string>
+    <string name="centers_exported">Lista exportada.</string>
+    <string name="centers_csv_failed">No se pudo leer o escribir el archivo.</string>
     <string name="center_dialysis">Centro de diálisis</string>
     <string name="center_hospital">Hospital</string>
     <string name="center_nephrologist">Nefrólogo</string>
@@ -387,6 +393,8 @@
     <string name="settings_notifications">Notificaciones</string>
     <string name="settings_allow_notifications">Permitir notificaciones</string>
     <string name="settings_exact_alarms">Permitir avisos a la hora exacta</string>
+    <string name="settings_battery">Permitir avisos con ahorro de batería</string>
+    <string name="settings_battery_hint">En Samsung y otros teléfonos, el ahorro de batería puede retrasar o bloquear los avisos. Elija NephroCare y póngalo en «Sin restricciones» o «No optimizar».</string>
     <string name="settings_notif_details">Mostrar el nombre del medicamento en las notificaciones</string>
     <string name="settings_notif_details_hint">Desactivado por defecto por privacidad. La pantalla de bloqueo nunca muestra datos de salud.</string>
     <string name="settings_privacy">Privacidad y datos</string>

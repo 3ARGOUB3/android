@@ -339,6 +339,12 @@
     <string name="centers_intro">Constituez votre liste de centres de dialyse, hôpitaux et néphrologues. Elle reste sur le téléphone, fonctionne hors ligne et permet d\'appeler ou d\'ouvrir la carte d\'un geste.</string>
     <string name="centers_search">Rechercher par nom ou ville</string>
     <string name="centers_empty">Aucune adresse. Touchez Ajouter pour enregistrer votre centre, l\'hôpital ou votre néphrologue.</string>
+    <string name="centers_import">Importer CSV</string>
+    <string name="centers_export">Exporter CSV</string>
+    <string name="centers_csv_hint">Une équipe soignante ou une association peut préparer la liste dans un tableur (colonnes : nom, type, ville, adresse, téléphone, notes) et partager le fichier CSV. L\'import ajoute les nouvelles adresses et ignore celles déjà enregistrées.</string>
+    <string name="centers_imported">%1$d adresses importées.</string>
+    <string name="centers_exported">Liste exportée.</string>
+    <string name="centers_csv_failed">Impossible de lire ou d\'écrire le fichier.</string>
     <string name="center_dialysis">Centre de dialyse</string>
     <string name="center_hospital">Hôpital</string>
     <string name="center_nephrologist">Néphrologue</string>
@@ -387,6 +393,8 @@
     <string name="settings_notifications">Notifications</string>
     <string name="settings_allow_notifications">Autoriser les notifications</string>
     <string name="settings_exact_alarms">Autoriser les rappels à l\'heure exacte</string>
+    <string name="settings_battery">Autoriser les rappels malgré l\'économie de batterie</string>
+    <string name="settings_battery_hint">Sur Samsung et d\'autres téléphones, l\'économie de batterie peut retarder ou bloquer les rappels. Choisissez NephroCare et réglez-le sur « Non restreint » ou « Ne pas optimiser ».</string>
     <string name="settings_notif_details">Afficher le nom des médicaments dans les notifications</string>
     <string name="settings_notif_details_hint">Désactivé par défaut pour la confidentialité. L\'écran verrouillé n\'affiche jamais de détails de santé.</string>
     <string name="settings_privacy">Confidentialité et données</string>

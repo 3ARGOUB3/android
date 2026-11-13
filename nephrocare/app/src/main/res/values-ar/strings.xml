@@ -339,6 +339,12 @@
     <string name="centers_intro">أنشئ قائمتك الخاصة بمراكز التصفية والمستشفيات وأطباء الكلى. تبقى القائمة على هاتفك وتعمل دون إنترنت، ويمكنك الاتصال أو فتح الخريطة بضغطة واحدة.</string>
     <string name="centers_search">ابحث بالاسم أو المدينة</string>
     <string name="centers_empty">لا توجد عناوين بعد. اضغط إضافة لحفظ مركزك أو المستشفى أو طبيبك.</string>
+    <string name="centers_import">استيراد CSV</string>
+    <string name="centers_export">تصدير CSV</string>
+    <string name="centers_csv_hint">يمكن لفريق العلاج أو جمعية تحضير القائمة في جدول (الأعمدة: الاسم، النوع، المدينة، العنوان، الهاتف، ملاحظات) ومشاركة ملف CSV. الاستيراد يضيف العناصر الجديدة ويتجاهل الموجودة.</string>
+    <string name="centers_imported">تم استيراد %1$d عنوان.</string>
+    <string name="centers_exported">تم تصدير القائمة.</string>
+    <string name="centers_csv_failed">تعذرت قراءة الملف أو كتابته.</string>
     <string name="center_dialysis">مركز تصفية</string>
     <string name="center_hospital">مستشفى</string>
     <string name="center_nephrologist">طبيب كلى</string>
@@ -387,6 +393,8 @@
     <string name="settings_notifications">الإشعارات</string>
     <string name="settings_allow_notifications">السماح بالإشعارات</string>
     <string name="settings_exact_alarms">السماح بالتذكير في الوقت المحدد بدقة</string>
+    <string name="settings_battery">السماح بالتذكيرات مع توفير البطارية</string>
+    <string name="settings_battery_hint">في سامسونج وبعض الهواتف الأخرى قد يؤخر توفير البطارية التذكيرات أو يمنعها. اختر NephroCare واجعله «غير مقيد» أو «عدم التحسين».</string>
     <string name="settings_notif_details">إظهار أسماء الأدوية في الإشعارات</string>
     <string name="settings_notif_details_hint">متوقف افتراضياً حفاظاً على الخصوصية. شاشة القفل لا تعرض أي تفاصيل صحية.</string>
     <string name="settings_privacy">الخصوصية والبيانات</string>

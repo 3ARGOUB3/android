@@ -1,6 +1,15 @@
 package com.nephrocare.ui
 
 import android.content.Intent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.material.icons.filled.FileDownload
+import androidx.compose.material.icons.filled.FileUpload
+import androidx.compose.material3.OutlinedButton
+import com.nephrocare.core.CenterRow
+import com.nephrocare.core.CentersCsv
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -60,6 +69,48 @@ fun CentersScreen(back: () -> Unit) {
     var query by rememberSaveable { mutableStateOf("") }
     var type by rememberSaveable { mutableStateOf("ALL") }
     var editing by remember { mutableStateOf<Center?>(null) }
+    var message by remember { mutableStateOf<String?>(null) }
+    val importedText = stringResource(R.string.centers_imported)
+    val exportedText = stringResource(R.string.centers_exported)
+    val failedText = stringResource(R.string.centers_csv_failed)
+
+    val importLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null) {
+            scope.launch {
+                message = try {
+                    val added = withContext(Dispatchers.IO) {
+                        val text = context.contentResolver.openInputStream(uri)?.use { it.readBytes().toString(Charsets.UTF_8) }.orEmpty()
+                        val existing = app.db.centers().all().map { key(it.name, it.city) }.toSet()
+                        val fresh = CentersCsv.parse(text)
+                            .filter { key(it.name, it.city) !in existing }
+                            .distinctBy { key(it.name, it.city) }
+                            .map { Center(name = it.name, type = it.type, city = it.city, address = it.address, phone = it.phone, notes = it.notes) }
+                        app.db.centers().insertAll(fresh)
+                        fresh.size
+                    }
+                    String.format(importedText, added)
+                } catch (e: Exception) {
+                    failedText
+                }
+            }
+        }
+    }
+    val exportLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/csv")) { uri ->
+        if (uri != null) {
+            scope.launch {
+                message = try {
+                    withContext(Dispatchers.IO) {
+                        val rows = app.db.centers().all().map { CenterRow(it.name, it.type, it.city, it.address, it.phone, it.notes) }
+                        // A BOM lets Excel open the Arabic text correctly.
+                        context.contentResolver.openOutputStream(uri, "wt")?.use { it.write(("\uFEFF" + CentersCsv.format(rows)).toByteArray(Charsets.UTF_8)) }
+                    }
+                    exportedText
+                } catch (e: Exception) {
+                    failedText
+                }
+            }
+        }
+    }
 
     ScreenScaffold(
         stringResource(R.string.section_centers), back,
@@ -77,6 +128,20 @@ fun CentersScreen(back: () -> Unit) {
             .filter { q.isEmpty() || TextNormalizer.normalize("${it.name} ${it.city} ${it.address}").contains(q) }
         LazyColumn(Modifier.padding(padding), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             item { Banner(stringResource(R.string.centers_intro)) }
+            item {
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    OutlinedButton(onClick = { importLauncher.launch(arrayOf("text/*", "application/vnd.ms-excel", "application/octet-stream")) }, modifier = Modifier.weight(1f)) {
+                        Icon(Icons.Filled.FileUpload, contentDescription = null)
+                        Text(" " + stringResource(R.string.centers_import), maxLines = 1)
+                    }
+                    OutlinedButton(onClick = { exportLauncher.launch("NephroCare_centres.csv") }, enabled = centers.isNotEmpty(), modifier = Modifier.weight(1f)) {
+                        Icon(Icons.Filled.FileDownload, contentDescription = null)
+                        Text(" " + stringResource(R.string.centers_export), maxLines = 1)
+                    }
+                }
+            }
+            item { Text(stringResource(R.string.centers_csv_hint), style = MaterialTheme.typography.bodySmall) }
+            message?.let { m -> item { Banner(m) } }
             item {
                 OutlinedTextField(
                     query, { query = it }, singleLine = true,
@@ -170,3 +235,5 @@ private fun CenterDialog(initial: Center, onDismiss: () -> Unit, onSave: (Center
         },
     )
 }
+
+private fun key(name: String, city: String) = TextNormalizer.normalize(name.trim() + "|" + city.trim())
