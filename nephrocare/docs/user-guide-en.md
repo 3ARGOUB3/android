@@ -20,10 +20,10 @@ Choose the language, read and accept the medical safety notice, enter your name 
 - **Nutrition**: guide, 78-food table, 17 Algerian dishes, recipes and a sample day.
 - **Fistula**: illustration, daily thrill and infection check, care articles.
 - **Dialysis schedule**: days, time, reminders, bag reminder the evening before, session log, bag checklist.
-- **Medicines**: name, dose copied from the prescription, times, reminders with a Taken action, history; the app never suggests doses.
+- **Medicines**: name, dose copied from the prescription, times, reminders with a Taken action, history, optional stock tracking (lowered by each dose, days left, reminder to renew the prescription, Refill button); the app never suggests doses.
 - **Prayer & adhkar**: offline prayer times with reminders, adhkar with counters, duas for the sick, full Quran with translations.
 - **Encyclopedia, support, emergency**: 70 articles per language; emergency call buttons.
-- **Search**, **media** (illustrations, your videos with subtitles), **diary** (symptoms, questions for the doctor), **fluids** (allowance set by your team), **centers** (your own directory with call and map; CSV import/export so an association can share one list – template in `docs/centres-template.csv`), **PDF reports** to share with the doctor.
+- **Search**, **media** (illustrations, your videos with subtitles), **diary** (symptoms, questions for the doctor), **fluids** (allowance set by your team; optional reminders every 2–4 h with +100/+200 ml buttons), **centers** (your own directory with call and map; CSV import/export so an association can share one list – template in `docs/centres-template.csv`), **PDF reports** to share with the doctor.
 
 ## 4. Settings and privacy
 Language, light/dark theme, text size, notification and exact-alarm permissions (on Samsung set the app's battery use to Unrestricted), medicine names in notifications (off by default), PIN lock, password-encrypted backup and restore, delete all data.

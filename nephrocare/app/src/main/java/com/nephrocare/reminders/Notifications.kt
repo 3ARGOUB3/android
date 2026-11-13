@@ -21,6 +21,7 @@ object Notifications {
     const val CHANNEL_DIALYSIS = "dialysis"
     const val CHANNEL_MEDS = "medication"
     const val CHANNEL_PRAYER = "prayer"
+    const val CHANNEL_FLUIDS = "fluids"
     const val EXTRA_ROUTE = "route"
 
     fun createChannels(context: Context) {
@@ -31,6 +32,7 @@ object Notifications {
             NotificationChannel(CHANNEL_DIALYSIS, c.getString(R.string.channel_dialysis), NotificationManager.IMPORTANCE_HIGH),
             NotificationChannel(CHANNEL_MEDS, c.getString(R.string.channel_meds), NotificationManager.IMPORTANCE_HIGH),
             NotificationChannel(CHANNEL_PRAYER, c.getString(R.string.channel_prayer), NotificationManager.IMPORTANCE_DEFAULT),
+            NotificationChannel(CHANNEL_FLUIDS, c.getString(R.string.channel_fluids), NotificationManager.IMPORTANCE_DEFAULT),
         ).forEach {
             // Lock screens only show the generic public version of each notification.
             it.lockscreenVisibility = android.app.Notification.VISIBILITY_PRIVATE

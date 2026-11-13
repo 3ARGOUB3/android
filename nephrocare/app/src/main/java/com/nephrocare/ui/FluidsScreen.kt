@@ -17,6 +17,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
+import androidx.compose.material3.Switch
+import com.nephrocare.core.FluidReminderCalc
+import java.time.LocalTime
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -106,6 +110,39 @@ fun FluidsScreen(back: () -> Unit, go: (String) -> Unit) {
                     val v = parseInt(target)?.takeIf { it in 100..5000 }
                     app.settings.updateProfile { it.copy(fluidTargetMl = v) }
                 }) { Text(stringResource(R.string.save)) }
+            }
+
+            SectionHeader(stringResource(R.string.fluid_rem_title))
+            val rem by app.settings.fluidReminder.collectAsState()
+            fun updateRem(f: (com.nephrocare.data.FluidReminder) -> com.nephrocare.data.FluidReminder) {
+                app.settings.updateFluidReminder(f)
+                app.rescheduleReminders()
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(stringResource(R.string.fluid_rem_switch), Modifier.weight(1f), style = MaterialTheme.typography.bodyLarge)
+                Switch(rem.enabled, { on -> updateRem { it.copy(enabled = on) } })
+            }
+            Text(stringResource(R.string.fluid_rem_hint), style = MaterialTheme.typography.bodySmall)
+            if (rem.enabled) {
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Text(stringResource(R.string.fluid_rem_from))
+                    TimeButton(LocalTime.of(rem.startHour, 0), Modifier.weight(1f)) { t ->
+                        updateRem { it.copy(startHour = t.hour, endHour = maxOf(it.endHour, t.hour)) }
+                    }
+                    Text(stringResource(R.string.fluid_rem_to))
+                    TimeButton(LocalTime.of(rem.endHour, 0), Modifier.weight(1f)) { t ->
+                        updateRem { it.copy(endHour = t.hour, startHour = minOf(it.startHour, t.hour)) }
+                    }
+                }
+                ChoiceChips(
+                    listOf("2", "3", "4").map { it to stringResource(R.string.fluid_rem_every, it.toInt()) },
+                    rem.intervalHours.toString(),
+                    { v -> updateRem { it.copy(intervalHours = v.toInt()) } },
+                )
+                val times = FluidReminderCalc.times(rem.startHour, rem.endHour, rem.intervalHours)
+                if (times.isNotEmpty()) {
+                    Text(times.joinToString("  ") { Fmt.time(it) }, color = MaterialTheme.colorScheme.primary)
+                }
             }
 
             SectionHeader(stringResource(R.string.fluids_today_list))

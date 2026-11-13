@@ -48,6 +48,11 @@ import com.nephrocare.AppContainer
 import com.nephrocare.R
 import com.nephrocare.core.ScheduleCalc
 import com.nephrocare.data.MedIntake
+import com.nephrocare.data.MedStock
+import com.nephrocare.core.fmt
+import androidx.compose.material3.AlertDialog
+import androidx.compose.ui.text.font.FontWeight
+import kotlin.math.floor
 import com.nephrocare.data.Medication
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -68,12 +73,41 @@ fun todayDoses(meds: List<Medication>, intakes: List<MedIntake>): List<Dose> {
 }
 
 suspend fun markDose(app: AppContainer, dose: Dose, status: String) {
-    if (app.db.intakes().countFor(dose.med.id, dose.scheduledAt) > 0) return
-    app.db.intakes().insert(
-        MedIntake(
-            medId = dose.med.id, medName = dose.med.name, dose = dose.med.dose,
-            scheduledAt = dose.scheduledAt, takenAt = System.currentTimeMillis(), status = status,
-        ),
+    if (MedStock.recordIntake(app, dose.med, dose.scheduledAt, status)) app.rescheduleReminders()
+}
+
+/** "Stock: 24 · about 8 days left", in red when it is time to renew. */
+@Composable
+fun StockLine(med: Medication) {
+    val stock = med.stock ?: return
+    val days = MedStock.daysLeft(med)
+    val low = MedStock.isLow(med)
+    Text(
+        if (days != null) stringResource(R.string.stock_line_days, fmt(stock, 1), floor(days).toInt())
+        else stringResource(R.string.stock_line, fmt(stock, 1)),
+        color = if (low) Danger else MaterialTheme.colorScheme.onSurfaceVariant,
+        fontWeight = if (low) FontWeight.SemiBold else FontWeight.Normal,
+        style = MaterialTheme.typography.bodyMedium,
+    )
+}
+
+@Composable
+private fun RefillDialog(med: Medication, onDismiss: () -> Unit, onRefill: (Double) -> Unit) {
+    var units by remember { mutableStateOf("") }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.stock_refill_title, med.name)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(stringResource(R.string.stock_refill_hint))
+                NumberField(units, { units = it }, stringResource(R.string.stock_units_added))
+            }
+        },
+        confirmButton = {
+            val v = parseDecimal(units)
+            TextButton(enabled = v != null && v > 0 && v <= 10_000, onClick = { v?.let(onRefill) }) { Text(stringResource(R.string.add)) }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
     )
 }
 
@@ -85,6 +119,18 @@ fun MedsScreen(back: () -> Unit, go: (String) -> Unit) {
     val meds by app.db.meds().observeAll().collectAsState(initial = emptyList())
     val intakes by app.db.intakes().observeAll().collectAsState(initial = emptyList())
     var tab by rememberSaveable { mutableIntStateOf(0) }
+    var refillFor by remember { mutableStateOf<Medication?>(null) }
+    val lowStock = meds.filter { MedStock.isLow(it) }
+
+    refillFor?.let { med ->
+        RefillDialog(med, onDismiss = { refillFor = null }) { units ->
+            scope.launch {
+                app.db.meds().refill(med.id, units)
+                app.rescheduleReminders()
+            }
+            refillFor = null
+        }
+    }
 
     ScreenScaffold(
         stringResource(R.string.section_meds), back,
@@ -106,6 +152,11 @@ fun MedsScreen(back: () -> Unit, go: (String) -> Unit) {
             when (tab) {
                 0 -> LazyColumn(contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     item { Banner(stringResource(R.string.med_never_change)) }
+                    if (lowStock.isNotEmpty()) {
+                        item {
+                            WarningBanner(stringResource(R.string.stock_low_banner, lowStock.joinToString(", ") { it.name }), onClick = { tab = 1 })
+                        }
+                    }
                     val doses = todayDoses(meds, intakes)
                     if (doses.isEmpty()) item { EmptyState(stringResource(R.string.home_no_meds)) }
                     items(doses, key = { "${it.med.id}-${it.scheduledAt}" }) { dose ->
@@ -151,8 +202,16 @@ fun MedsScreen(back: () -> Unit, go: (String) -> Unit) {
                                     val times = ScheduleCalc.parseTimes(med.times)
                                     if (times.isNotEmpty()) Text(times.joinToString("  ") { Fmt.time(it) }, color = MaterialTheme.colorScheme.primary)
                                     if (!med.active) Text(stringResource(R.string.med_inactive), color = MaterialTheme.colorScheme.error)
+                                    StockLine(med)
                                 }
                                 Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.edit))
+                            }
+                            if (med.stock != null && med.active) {
+                                FilledTonalButton(onClick = { refillFor = med }) {
+                                    Icon(Icons.Filled.Add, contentDescription = null)
+                                    Spacer(Modifier.width(6.dp))
+                                    Text(stringResource(R.string.stock_refill))
+                                }
                             }
                         }
                     }
@@ -166,7 +225,7 @@ fun MedsScreen(back: () -> Unit, go: (String) -> Unit) {
                             Fmt.dateTime(intake.takenAt, language) + " · " +
                                 stringResource(if (intake.status == "TAKEN") R.string.med_taken else R.string.med_skipped),
                             accent = if (intake.status == "TAKEN") Ok else Warning,
-                            onDelete = { scope.launch { app.db.intakes().delete(intake) } },
+                            onDelete = { scope.launch { MedStock.deleteIntake(app, intake) } },
                         )
                     }
                 }
@@ -190,6 +249,9 @@ fun MedEditScreen(id: Long, back: () -> Unit) {
     var instructions by rememberSaveable { mutableStateOf("") }
     var active by rememberSaveable { mutableStateOf(true) }
     var reminders by rememberSaveable { mutableStateOf(true) }
+    var stock by rememberSaveable { mutableStateOf("") }
+    var perDose by rememberSaveable { mutableStateOf("1") }
+    var refillDays by rememberSaveable { mutableStateOf("5") }
     var confirmDelete by remember { mutableStateOf(false) }
 
     LaunchedEffect(id) {
@@ -198,6 +260,7 @@ fun MedEditScreen(id: Long, back: () -> Unit) {
                 existing = m
                 name = m.name; dose = m.dose; form = m.form; times = m.times
                 instructions = m.instructions; active = m.active; reminders = m.reminders
+                stock = m.stock?.let { fmt(it, 2) } ?: ""; perDose = fmt(m.perDose, 2); refillDays = m.refillDays.toString()
             }
             loaded = true
         }
@@ -235,6 +298,20 @@ fun MedEditScreen(id: Long, back: () -> Unit) {
             TimeButton(LocalTime.of(8, 0)) { picked -> times = ScheduleCalc.formatTimes(parsed + picked) }
             Text(stringResource(R.string.med_add_time_hint), style = MaterialTheme.typography.bodySmall)
 
+            SectionHeader(stringResource(R.string.stock_title))
+            Text(stringResource(R.string.stock_hint), style = MaterialTheme.typography.bodySmall)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                NumberField(stock, { stock = it }, stringResource(R.string.stock_units), Modifier.weight(1f))
+                NumberField(perDose, { perDose = it }, stringResource(R.string.stock_per_dose), Modifier.weight(1f))
+            }
+            Text(stringResource(R.string.stock_warn_days), style = MaterialTheme.typography.titleSmall)
+            ChoiceChips(listOf("3", "5", "7", "10", "14").map { it to stringResource(R.string.stock_days, it.toInt()) }, refillDays, { refillDays = it })
+            val previewStock = parseDecimal(stock)
+            val previewPerDose = parseDecimal(perDose)?.takeIf { it > 0 } ?: 1.0
+            com.nephrocare.core.StockCalc.daysLeft(previewStock, previewPerDose, parsed.size)?.let {
+                Text(stringResource(R.string.stock_preview, floor(it).toInt()), color = MaterialTheme.colorScheme.primary)
+            }
+
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(stringResource(R.string.med_reminders), modifier = Modifier.weight(1f))
                 Switch(checked = reminders, onCheckedChange = { reminders = it })
@@ -252,6 +329,9 @@ fun MedEditScreen(id: Long, back: () -> Unit) {
                             id = existing?.id ?: 0, name = name.trim(), dose = dose.trim(), form = form.trim(),
                             times = times, instructions = instructions.trim(), active = active, reminders = reminders,
                             createdAt = existing?.createdAt ?: System.currentTimeMillis(),
+                            stock = parseDecimal(stock)?.takeIf { it in 0.0..100_000.0 },
+                            perDose = parseDecimal(perDose)?.takeIf { it > 0 && it <= 100 } ?: 1.0,
+                            refillDays = refillDays.toIntOrNull() ?: 5,
                         )
                         if (existing == null) app.db.meds().insert(med) else app.db.meds().update(med)
                         app.rescheduleReminders()

@@ -91,3 +91,42 @@ object BpCalc {
     fun isVeryHigh(systolic: Int, diastolic: Int) = systolic >= 180 || diastolic >= 110
     fun isLow(systolic: Int) = systolic < 90
 }
+
+/**
+ * Medicine stock counting. Units are whatever the patient counts (tablets, sachets, ampoules);
+ * [perDose] is how many units one intake uses, as written on the prescription. Nothing here
+ * suggests or changes a dose: it only counts what is left.
+ */
+object StockCalc {
+    fun dailyUse(perDose: Double, timesPerDay: Int): Double = perDose * timesPerDay
+
+    /** Days of treatment left, or null when the stock is not tracked or the medicine has no fixed times. */
+    fun daysLeft(stock: Double?, perDose: Double, timesPerDay: Int): Double? {
+        val daily = dailyUse(perDose, timesPerDay)
+        if (stock == null || daily <= 0.0) return null
+        return (stock / daily).coerceAtLeast(0.0)
+    }
+
+    /** Low when the stock covers [refillDays] days or less (or, without fixed times, one intake or less). */
+    fun isLow(stock: Double?, perDose: Double, timesPerDay: Int, refillDays: Int): Boolean {
+        if (stock == null) return false
+        if (stock <= 0.0) return true
+        val days = daysLeft(stock, perDose, timesPerDay) ?: return stock <= perDose
+        return days <= refillDays
+    }
+}
+
+object FluidReminderCalc {
+    /** The reminder times of a day: start, start + interval, … up to end (inclusive). */
+    fun times(startHour: Int, endHour: Int, intervalHours: Int): List<LocalTime> {
+        if (intervalHours <= 0 || endHour < startHour) return emptyList()
+        return (startHour..endHour step intervalHours).map { LocalTime.of(it.coerceIn(0, 23), 0) }
+    }
+
+    fun next(startHour: Int, endHour: Int, intervalHours: Int, now: LocalDateTime): LocalDateTime? {
+        val times = times(startHour, endHour, intervalHours)
+        if (times.isEmpty()) return null
+        times.firstOrNull { now.toLocalDate().atTime(it).isAfter(now) }?.let { return now.toLocalDate().atTime(it) }
+        return now.toLocalDate().plusDays(1).atTime(times.first())
+    }
+}

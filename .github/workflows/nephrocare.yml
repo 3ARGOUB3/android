@@ -70,5 +70,5 @@ jobs:
           gh release create nephrocare-latest nephrocare.apk \
             --target "${{ github.sha }}" \
             --latest=false \
-            --title "NephroCare 1.0 (build ${{ github.run_number }})" \
+            --title "NephroCare 1.1 (build ${{ github.run_number }})" \
             --notes "Build from \`${{ github.ref_name }}\` (${{ github.sha }}). Download nephrocare.apk on the phone and open it to install (Android 6.0 or newer)."

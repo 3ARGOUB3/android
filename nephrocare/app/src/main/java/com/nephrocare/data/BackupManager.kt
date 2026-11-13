@@ -17,6 +17,7 @@ data class BackupData(
     val profile: Profile = Profile(),
     val schedule: DialysisSchedule = DialysisSchedule(),
     val prayer: PrayerSettings = PrayerSettings(),
+    val fluidReminder: FluidReminder = FluidReminder(),
     val language: String = "",
     val theme: String = "system",
     val textScale: Float = 1f,
@@ -46,6 +47,7 @@ object BackupManager {
             profile = app.settings.profile.value,
             schedule = app.settings.schedule.value,
             prayer = app.settings.prayer.value,
+            fluidReminder = app.settings.fluidReminder.value,
             language = s.language, theme = s.theme, textScale = s.textScale, notificationDetails = s.notificationDetails,
             weights = db.weights().all(), bloodPressure = db.bp().all(), labs = db.labs().all(),
             sessions = db.sessions().all(), medications = db.meds().all(), intakes = db.intakes().all(),
@@ -80,6 +82,7 @@ object BackupManager {
         app.settings.updateProfile { b.profile }
         app.settings.updateSchedule { b.schedule }
         app.settings.updatePrayer { b.prayer }
+        app.settings.updateFluidReminder { b.fluidReminder }
         app.settings.updateSettings {
             it.copy(theme = b.theme, textScale = b.textScale, notificationDetails = b.notificationDetails)
         }

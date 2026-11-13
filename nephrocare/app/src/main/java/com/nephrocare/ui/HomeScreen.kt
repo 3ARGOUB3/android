@@ -183,6 +183,13 @@ fun HomeScreen(go: (String) -> Unit) {
 
             // Medicines today
             val doses = todayDoses(meds, intakes)
+            val lowStock = meds.filter { com.nephrocare.data.MedStock.isLow(it) }
+            if (lowStock.isNotEmpty()) {
+                WarningBanner(
+                    stringResource(R.string.stock_low_banner, lowStock.joinToString(", ") { it.name }),
+                    onClick = { go(Routes.MEDS) },
+                )
+            }
             AppCard(onClick = { go(Routes.MEDS) }) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Filled.Medication, contentDescription = null, tint = Green)

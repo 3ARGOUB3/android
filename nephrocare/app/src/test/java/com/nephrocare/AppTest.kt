@@ -59,7 +59,7 @@ fun seed(app: AppContainer) = runBlocking {
         db.labs().insert(LabResult(code = t.code, value = (t.general.high ?: 10.0) * 1.1, unit = t.mainUnit, date = now - 30 * DAY))
         db.labs().insert(LabResult(code = t.code, value = (t.general.low ?: 1.0) * 0.9, unit = t.mainUnit, date = now - 2 * DAY))
     }
-    val medId = db.meds().insert(Medication(name = "Calcium carbonate", dose = "500 mg", times = "08:00;13:00;20:00", instructions = "With meals"))
+    val medId = db.meds().insert(Medication(name = "Calcium carbonate", dose = "500 mg", times = "08:00;13:00;20:00", instructions = "With meals", stock = 10.0))
     db.intakes().insert(MedIntake(medId = medId, medName = "Calcium carbonate", dose = "500 mg", scheduledAt = now - DAY, takenAt = now - DAY))
     db.sessions().insert(DialysisSession(date = now - 2 * DAY, durationMin = 240, preWeight = 71.2, postWeight = 68.9, preSystolic = 150, preDiastolic = 85))
     db.diary().insert(DiaryEntry(date = now - DAY, fatigue = 6, appetite = 1, sleepHours = 5.5, symptoms = "ITCH,CRAMPS", note = "Cramps at the end"))
@@ -70,6 +70,7 @@ fun seed(app: AppContainer) = runBlocking {
     app.settings.updateProfile { it.copy(name = "Amina", fluidTargetMl = 700, nephrologistPhone = "0550000000") }
     app.settings.updateSchedule { it.copy(days = listOf(6, 1, 3)) }
     app.settings.updatePrayer { it.copy(reminders = listOf("FAJR", "MAGHRIB")) }
+    app.settings.updateFluidReminder { it.copy(enabled = true) }
 }
 
 /** Opens every screen, with data, in each content language: none may crash. */

@@ -1,4 +1,4 @@
-# NephroCare 1.0 – رفيق مريض الكلى
+# NephroCare 1.1 – رفيق مريض الكلى
 
 An offline Android app for people with kidney failure and on dialysis: health education,
 personal tracking (dry weight, blood pressure, labs, fluids, medicines, sessions, symptoms),
@@ -30,12 +30,12 @@ before clinical use.**
 | Nutrition | guide (K, P, Na, protein, fluids, soaking method, labels, meal plan), 78-food table with filters, 17 Algerian dishes with ratings and tips, recipes |
 | Fistula | illustration, daily thrill/redness/swelling/pain check with history, 8 care articles |
 | Dialysis schedule | days and time, reminder before the session, evening "prepare your bag" reminder, sessions log (weights and BP feed the other charts), bag checklist |
-| Medicines | name, prescribed dose (free text), times, reminders with a "Taken" action, today/history, information articles; never suggests doses |
+| Medicines | name, prescribed dose (free text), times, reminders with a "Taken" action, today/history, information articles, optional stock count with days left and a renew-prescription reminder; never suggests doses |
 | Prayer & adhkar | offline prayer times (58 cities or coordinates, 9 methods, Hanafi/standard Asr, per-prayer adjustment, reminders), morning/evening/after-prayer adhkar with counters, duas for the sick, full Quran with translations |
 | Encyclopedia, support, emergency | 70 articles × 4 languages; emergency numbers and call buttons |
 | Search | offline search across articles, labs, foods and dishes (Arabic diacritics and letter variants ignored) |
 | Media | drawn illustrations (kidneys, fistula, dialysis circuit); video library (phone file or link, .srt/.vtt subtitles) |
-| Diary, fluids, centers | symptoms/fatigue/appetite/sleep, questions for the doctor; fluid intake vs team allowance, 7-day chart; personal directory of centers searchable by city with call/map, CSV import/export (template `docs/centres-template.csv`) |
+| Diary, fluids, centers | symptoms/fatigue/appetite/sleep, questions for the doctor; fluid intake vs team allowance, 7-day chart, optional reminders to log and spread drinks with +100/+200 ml notification buttons; personal directory of centers searchable by city with call/map, CSV import/export (template `docs/centres-template.csv`) |
 | Reports | PDF (A4, RTL in Arabic) with charts and tables for a chosen period, share/save |
 | Privacy | data only on the phone, Android cloud backup disabled, AES-256 encrypted backup file, PIN lock with screenshot blocking, generic lock-screen notifications, "delete all my data" |
 | Reminders | AlarmManager, exact when allowed; re-set after reboot, clock change and each alarm; button to exempt the app from battery optimisation (Samsung) |

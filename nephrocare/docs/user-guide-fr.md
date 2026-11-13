@@ -22,10 +22,10 @@ Poids actuel et écart au poids sec, prochaine séance, dernière tension, médi
 - **Nutrition** : guide (potassium, phosphore, sel, protéines, liquides, trempage, étiquettes, menus), tableau de 78 aliments, 17 plats algériens évalués, recettes.
 - **Fistule** : illustration, contrôle quotidien du frémissement et des signes d'infection, conseils de soins.
 - **Séances** : jours, heure, rappel avant la séance et rappel « préparer mon sac » la veille ; journal des séances ; liste du sac.
-- **Médicaments** : nom, dose recopiée de l'ordonnance, heures ; rappels avec action « Pris », historique, informations. Aucune dose n'est jamais proposée.
+- **Médicaments** : nom, dose recopiée de l'ordonnance, heures ; rappels avec action « Pris », historique, informations ; stock facultatif (diminue à chaque prise, jours restants, rappel quand il faut renouveler l'ordonnance, bouton « Réapprovisionner »). Aucune dose n'est jamais proposée.
 - **Prière et invocations** : horaires calculés hors ligne (villes ou coordonnées, méthodes de calcul, ajustement en minutes, rappels), adhkar du matin, du soir et après la prière avec compteur, invocations du malade, Coran complet avec traduction du sens.
 - **Encyclopédie, soutien moral, urgences** : 70 articles dans chaque langue, boutons d'appel d'urgence (14 en Algérie, 112 en Europe, votre néphrologue, votre contact).
-- **Recherche** hors ligne, **médiathèque** (illustrations, vidéos ajoutées avec sous-titres), **carnet** (symptômes, questions pour le médecin), **liquides** (quota fixé par l'équipe), **centres** (votre annuaire avec appel et carte, import/export CSV pour partager une liste préparée par une association : modèle `docs/centres-template.csv`).
+- **Recherche** hors ligne, **médiathèque** (illustrations, vidéos ajoutées avec sous-titres), **carnet** (symptômes, questions pour le médecin), **liquides** (quota fixé par l'équipe, rappels facultatifs toutes les 2–4 h avec boutons « +100 ml / +200 ml »), **centres** (votre annuaire avec appel et carte, import/export CSV pour partager une liste préparée par une association : modèle `docs/centres-template.csv`).
 - **Rapports PDF** : période et contenu au choix, à ouvrir, envoyer au médecin ou enregistrer.
 
 ## 5. Réglages et confidentialité

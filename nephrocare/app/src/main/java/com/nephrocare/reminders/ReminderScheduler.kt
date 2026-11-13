@@ -10,6 +10,8 @@ import com.nephrocare.AppContainer
 import com.nephrocare.core.AsrMethod
 import com.nephrocare.core.CalcMethod
 import com.nephrocare.core.Cities
+import com.nephrocare.core.FluidReminderCalc
+import com.nephrocare.data.MedStock
 import com.nephrocare.core.Prayer
 import com.nephrocare.core.PrayerTimes
 import com.nephrocare.core.ScheduleCalc
@@ -31,6 +33,8 @@ object ReminderScheduler {
     const val KIND_PREP = "prep"
     const val KIND_MED = "med"
     const val KIND_PRAYER = "prayer"
+    const val KIND_STOCK = "stock"
+    const val KIND_FLUID = "fluid"
     const val EXTRA_KIND = "kind"
     const val EXTRA_CODE = "code"
     const val EXTRA_MED_ID = "medId"
@@ -39,6 +43,10 @@ object ReminderScheduler {
 
     private const val CODE_DIALYSIS = 1000
     private const val CODE_PREP = 1001
+    private const val CODE_STOCK = 1002
+    private const val CODE_FLUID = 1003
+    /** The daily low-stock check. */
+    val STOCK_CHECK_TIME: LocalTime = LocalTime.of(10, 0)
     private const val CODE_PRAYER = 2000
     private const val CODE_MED = 100_000
 
@@ -81,7 +89,21 @@ object ReminderScheduler {
             }
         }
 
-        for (med in c.db.meds().all()) {
+        val meds = c.db.meds().all()
+        if (meds.any { MedStock.isLow(it) }) {
+            var at = now.toLocalDate().atTime(STOCK_CHECK_TIME)
+            if (!at.isAfter(now)) at = at.plusDays(1)
+            alarms += Alarm(CODE_STOCK, KIND_STOCK, at)
+        }
+
+        val fluid = c.settings.fluidReminder.value
+        if (fluid.enabled) {
+            FluidReminderCalc.next(fluid.startHour, fluid.endHour, fluid.intervalHours, now)?.let {
+                alarms += Alarm(CODE_FLUID, KIND_FLUID, it)
+            }
+        }
+
+        for (med in meds) {
             if (!med.active || !med.reminders) continue
             ScheduleCalc.parseTimes(med.times).take(16).forEachIndexed { index, t ->
                 var at = now.toLocalDate().atTime(t)

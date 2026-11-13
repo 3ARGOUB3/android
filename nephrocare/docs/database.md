@@ -2,8 +2,8 @@
 
 Local SQLite database `nephrocare.db` managed by Room (`app/src/main/java/com/nephrocare/data/`),
 stored in the app's private storage and excluded from Android cloud backup and device transfer.
-The exact schema is exported at build time to `app/schemas/com.nephrocare.data.AppDatabase/1.json`
-(included in the CI artifact `nephrocare-apk`). Times are epoch milliseconds.
+The exact schema is exported at build time to `app/schemas/com.nephrocare.data.AppDatabase/<version>.json`
+(included in the CI artifact `nephrocare-apk`). Times are epoch milliseconds. Current version: 2 (version 1 → 2 adds the medicine stock columns; the migration keeps all data).
 
 | Table | Columns | Notes |
 |---|---|---|
@@ -11,7 +11,7 @@ The exact schema is exported at build time to `app/schemas/com.nephrocare.data.A
 | `blood_pressure` | id, time, systolic, diastolic, pulse, context, note | context = PRE, POST, HOME, OTHER |
 | `lab_results` | id, code, value, unit, date, note | code = UREA, CREAT, K, PHOS, CA, HB, FERRITIN, ALB, PTH, CRP, TSAT; value in the lab's unit |
 | `dialysis_sessions` | id, date, durationMin, preWeight, postWeight, pre/postSystolic, pre/postDiastolic, note | |
-| `medications` | id, name, dose, form, times, instructions, active, reminders, createdAt | times = "08:00;20:00"; dose is free text as prescribed |
+| `medications` | id, name, dose, form, times, instructions, active, reminders, createdAt, stock, perDose, refillDays | times = "08:00;20:00"; dose is free text as prescribed; stock (units left, null = not tracked) and perDose added in version 2 |
 | `medication_intakes` | id, medId, medName, dose, scheduledAt, takenAt, status | status = TAKEN or SKIPPED |
 | `diary` | id, date, fatigue, appetite, sleepHours, sleepQuality, symptoms, note | symptoms = comma-separated codes |
 | `doctor_questions` | id, created, text, answered, answer | |

@@ -51,6 +51,15 @@ data class PrayerSettings(
     val offsets: Map<String, Int> = emptyMap(),
 )
 
+/** Optional reminders to log and spread drinks through the day. */
+@Serializable
+data class FluidReminder(
+    val enabled: Boolean = false,
+    val startHour: Int = 9,
+    val endHour: Int = 21,
+    val intervalHours: Int = 3,
+)
+
 @Serializable
 data class AppSettings(
     /** "", "ar", "fr", "en" or "es"; "" follows the phone. */
@@ -73,11 +82,13 @@ class SettingsStore(context: Context) {
     val profile = MutableStateFlow(read("profile", Profile.serializer()) ?: Profile())
     val schedule = MutableStateFlow(read("schedule", DialysisSchedule.serializer()) ?: DialysisSchedule())
     val prayer = MutableStateFlow(read("prayer", PrayerSettings.serializer()) ?: PrayerSettings())
+    val fluidReminder = MutableStateFlow(read("fluid_reminder", FluidReminder.serializer()) ?: FluidReminder())
 
     fun updateSettings(f: (AppSettings) -> AppSettings) = save("settings", AppSettings.serializer(), settings, f)
     fun updateProfile(f: (Profile) -> Profile) = save("profile", Profile.serializer(), profile, f)
     fun updateSchedule(f: (DialysisSchedule) -> DialysisSchedule) = save("schedule", DialysisSchedule.serializer(), schedule, f)
     fun updatePrayer(f: (PrayerSettings) -> PrayerSettings) = save("prayer", PrayerSettings.serializer(), prayer, f)
+    fun updateFluidReminder(f: (FluidReminder) -> FluidReminder) = save("fluid_reminder", FluidReminder.serializer(), fluidReminder, f)
 
     /** Remembers which alarm request codes are set so stale ones can be cancelled. */
     var scheduledAlarmCodes: Set<String>
@@ -92,6 +103,7 @@ class SettingsStore(context: Context) {
         profile.value = Profile()
         schedule.value = DialysisSchedule()
         prayer.value = PrayerSettings()
+        fluidReminder.value = FluidReminder()
         updateSettings { keep }
     }
 

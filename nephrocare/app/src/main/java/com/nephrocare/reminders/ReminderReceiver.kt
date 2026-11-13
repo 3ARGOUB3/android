@@ -9,7 +9,8 @@ import com.nephrocare.LocaleHelper
 import com.nephrocare.NephroApp
 import com.nephrocare.R
 import com.nephrocare.core.Prayer
-import com.nephrocare.data.MedIntake
+import com.nephrocare.data.FluidEntry
+import com.nephrocare.data.MedStock
 import com.nephrocare.ui.prayerName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +27,7 @@ class ReminderReceiver : BroadcastReceiver() {
                 when (intent.action) {
                     ReminderScheduler.ACTION_ALARM -> onAlarm(context, intent)
                     ACTION_TAKEN -> onTaken(context, intent)
+                    ACTION_ADD_FLUID -> onAddFluid(context, intent)
                 }
             } finally {
                 pending.finish()
@@ -80,6 +82,35 @@ class ReminderReceiver : BroadcastReceiver() {
                     )
                 }
             }
+            ReminderScheduler.KIND_STOCK -> MedStock.notifyLow(container, MedStock.lowStock(container))
+            ReminderScheduler.KIND_FLUID -> {
+                val today = java.time.LocalDate.now()
+                val total = container.db.fluids().all()
+                    .filter { java.time.Instant.ofEpochMilli(it.time).atZone(ZoneId.systemDefault()).toLocalDate() == today }
+                    .sumOf { it.ml }
+                val target = container.settings.profile.value.fluidTargetMl
+                val text = when {
+                    target == null -> c.getString(R.string.notif_fluid_total, total)
+                    total > target -> c.getString(R.string.notif_fluid_over, total, target)
+                    else -> c.getString(R.string.notif_fluid_left, total, target, target - total)
+                }
+                fun add(ml: Int) = NotificationCompat.Action(
+                    0, c.getString(R.string.notif_fluid_add, ml),
+                    PendingIntent.getBroadcast(
+                        context, code * 10 + ml / 100,
+                        Intent(context, ReminderReceiver::class.java)
+                            .setAction(ACTION_ADD_FLUID)
+                            .putExtra(EXTRA_NOTIFICATION_ID, code)
+                            .putExtra(EXTRA_ML, ml),
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                    ),
+                )
+                Notifications.show(
+                    context, code, Notifications.CHANNEL_FLUIDS,
+                    c.getString(R.string.notif_fluid_title), text, "fluids",
+                    listOf(add(100), add(200)),
+                )
+            }
             ReminderScheduler.KIND_PRAYER -> {
                 val prayer = runCatching { Prayer.valueOf(intent.getStringExtra(ReminderScheduler.EXTRA_PRAYER) ?: "") }.getOrNull()
                 if (prayer != null) {
@@ -100,16 +131,21 @@ class ReminderReceiver : BroadcastReceiver() {
         val medId = intent.getLongExtra(ReminderScheduler.EXTRA_MED_ID, 0)
         val at = intent.getLongExtra(ReminderScheduler.EXTRA_AT, 0)
         val med = container.db.meds().byId(medId)
-        if (med != null && container.db.intakes().countFor(medId, at) == 0) {
-            container.db.intakes().insert(
-                MedIntake(medId = medId, medName = med.name, dose = med.dose, scheduledAt = at, takenAt = System.currentTimeMillis()),
-            )
-        }
+        if (med != null) MedStock.recordIntake(container, med, at, "TAKEN")
+        Notifications.cancel(context, intent.getIntExtra(EXTRA_NOTIFICATION_ID, 0))
+        ReminderScheduler.rescheduleAll(container)
+    }
+
+    private suspend fun onAddFluid(context: Context, intent: Intent) {
+        val ml = intent.getIntExtra(EXTRA_ML, 0)
+        if (ml > 0) NephroApp.container(context).db.fluids().insert(FluidEntry(time = System.currentTimeMillis(), ml = ml))
         Notifications.cancel(context, intent.getIntExtra(EXTRA_NOTIFICATION_ID, 0))
     }
 
     companion object {
         const val ACTION_TAKEN = "com.nephrocare.action.TAKEN"
         const val EXTRA_NOTIFICATION_ID = "notificationId"
+        const val ACTION_ADD_FLUID = "com.nephrocare.action.ADD_FLUID"
+        const val EXTRA_ML = "ml"
     }
 }

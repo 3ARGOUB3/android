@@ -1,5 +1,6 @@
 package com.nephrocare.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -69,6 +70,12 @@ data class Medication(
     val active: Boolean = true,
     val reminders: Boolean = true,
     val createdAt: Long = System.currentTimeMillis(),
+    /** Units left (tablets, sachets…); null when the patient does not track the stock. */
+    val stock: Double? = null,
+    /** Units used by one intake, copied from the prescription. */
+    @ColumnInfo(defaultValue = "1") val perDose: Double = 1.0,
+    /** Warn when the stock covers this many days or fewer. */
+    @ColumnInfo(defaultValue = "5") val refillDays: Int = 5,
 )
 
 /** status: TAKEN or SKIPPED. */
