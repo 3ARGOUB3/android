@@ -7,7 +7,7 @@
           --accent: #818cf8; --accent-fg: #111; --soft: #26262f; --danger: #f87171; }
 }
 * { box-sizing: border-box; }
-body { width: 300px; margin: 0; padding: 14px; background: var(--bg); color: var(--fg);
+body { width: 300px; max-width: 100%; margin: 0; padding: 14px; background: var(--bg); color: var(--fg);
        font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
 header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 h1 { font-size: 15px; margin: 0; }
@@ -38,3 +38,9 @@ footer { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--line);
          color: var(--muted); font-size: 11px; display: grid; gap: 4px; }
 kbd { font: 10px ui-monospace, monospace; padding: 1px 4px; border: 1px solid var(--line);
       border-radius: 4px; background: var(--soft); }
+/* Firefox for Android opens the popup full screen. */
+@media (pointer: coarse) and (max-width: 600px) {
+  body { width: auto; font-size: 15px; padding: 18px; }
+  button { padding: 10px; }
+  footer { display: none; }
+}

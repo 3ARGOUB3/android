@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auto Scroll Bookmarklet</title>
+<style>
+  :root { --bg:#f7f7fb; --card:#fff; --fg:#1b1b22; --muted:#6b6b78; --line:#e4e4ea; --accent:#4f46e5; --accent-fg:#fff; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg:#121218; --card:#1b1b22; --fg:#ececf1; --muted:#9a9aa8; --line:#33333d; --accent:#818cf8; --accent-fg:#111; } }
+  :root[data-theme="dark"] { --bg:#121218; --card:#1b1b22; --fg:#ececf1; --muted:#9a9aa8; --line:#33333d; --accent:#818cf8; --accent-fg:#111; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  main { max-width:640px; margin:0 auto; padding:24px 16px 48px; }
+  h1 { font-size:26px; margin:0 0 4px; }
+  .lead { color:var(--muted); margin:0 0 20px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:14px; }
+  h2 { font-size:17px; margin:0 0 8px; }
+  ol { margin:0; padding-left:22px; } li { margin:4px 0; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:44px; padding:0 16px;
+         border-radius:10px; border:none; background:var(--accent); color:var(--accent-fg); font:600 15px system-ui,sans-serif;
+         text-decoration:none; cursor:pointer; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:10px 0 4px; }
+  textarea { width:100%; height:84px; font:12px ui-monospace,monospace; border:1px solid var(--line); border-radius:8px;
+             background:var(--bg); color:var(--fg); padding:8px; resize:vertical; }
+  code { font:14px ui-monospace,monospace; background:var(--bg); border:1px solid var(--line); border-radius:5px; padding:0 4px; }
+  .muted { color:var(--muted); font-size:14px; }
+  #copied { color:#16a34a; font-weight:600; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Auto Scroll</h1>
+  <p class="lead">Hands-free scrolling on your phone or any browser, using a bookmark.</p>
+
+  <section class="card">
+    <h2>📱 Phone: Chrome, Samsung Internet, Edge, Safari</h2>
+    <ol>
+      <li>Tap <b>Copy code</b> below.</li>
+      <li>Bookmark this page (⋮ → ☆), then edit the bookmark.</li>
+      <li>Rename it to <code>autoscroll</code> and paste the copied code over the URL. Save.</li>
+      <li>On any page, tap the address bar, type <code>autoscroll</code> and tap the bookmark in the suggestions (the one showing a star).</li>
+    </ol>
+    <div class="row">
+      <button class="btn" id="copy" type="button">Copy code</button>
+      <span id="copied" hidden>Copied ✓</span>
+    </div>
+    <textarea id="code" readonly>{{CODE}}</textarea>
+  </section>
+
+  <section class="card">
+    <h2>💻 Computer</h2>
+    <p>Drag this button onto your bookmarks bar, then click it on any page:</p>
+    <div class="row"><a class="btn" href="{{HREF}}" onclick="event.preventDefault();alert('Drag me to the bookmarks bar instead of clicking.');">⇩ Auto Scroll</a></div>
+    <p class="muted">On a computer the Chrome extension has more options. See the README.</p>
+  </section>
+
+  <section class="card">
+    <h2>Using it</h2>
+    <ul>
+      <li>A control bar appears at the bottom right: <b>▼/▲</b> direction, <b>− / +</b> speed, <b>❚❚</b> pause, <b>✕</b> stop.</li>
+      <li>Swiping the page pauses it for a moment, then it carries on.</li>
+      <li>Open the bookmark again to stop it. Your speed is remembered for each site.</li>
+    </ul>
+    <p class="muted">Some sites with strict security settings block bookmarks like this one. If nothing happens on a site, that's why.</p>
+  </section>
+</main>
+<script>
+  document.getElementById("copy").addEventListener("click", async () => {
+    const ta = document.getElementById("code");
+    try { await navigator.clipboard.writeText(ta.value); }
+    catch (_) { ta.select(); document.execCommand("copy"); }
+    document.getElementById("copied").hidden = false;
+  });
+</script>
+</body>
+</html>

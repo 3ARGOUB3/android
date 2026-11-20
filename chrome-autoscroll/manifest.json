@@ -3,26 +3,58 @@
   "name": "Auto Scroll",
   "version": "1.0.0",
   "description": "Smooth, hands-free auto scrolling with adjustable speed, direction and keyboard shortcuts.",
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_title": "Auto Scroll",
-    "default_icon": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   },
-  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
-  "background": { "service_worker": "background.js" },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "scripts": [
+      "background.js"
+    ]
+  },
   "commands": {
     "toggle-scroll": {
-      "suggested_key": { "default": "Alt+Shift+S" },
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
       "description": "Start / stop auto scroll"
     },
     "speed-up": {
-      "suggested_key": { "default": "Alt+Shift+Up" },
+      "suggested_key": {
+        "default": "Alt+Shift+Up"
+      },
       "description": "Increase scroll speed"
     },
     "speed-down": {
-      "suggested_key": { "default": "Alt+Shift+Down" },
+      "suggested_key": {
+        "default": "Alt+Shift+Down"
+      },
       "description": "Decrease scroll speed"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "autoscroll@example.local",
+      "strict_min_version": "121.0"
+    },
+    "gecko_android": {
+      "strict_min_version": "121.0"
     }
   }
 }
