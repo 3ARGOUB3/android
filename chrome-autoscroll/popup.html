@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>Auto Scroll</h1>
+    <span id="state" class="pill">Stopped</span>
+  </header>
+
+  <button id="toggle" class="primary">Start</button>
+
+  <section>
+    <label for="speed">Speed <output id="speedOut">60</output> px/s</label>
+    <input id="speed" type="range" min="5" max="1000" step="5" value="60">
+    <div class="presets">
+      <button data-speed="25">Slow</button>
+      <button data-speed="60">Read</button>
+      <button data-speed="150">Skim</button>
+      <button data-speed="400">Fast</button>
+    </div>
+  </section>
+
+  <section class="row">
+    <span>Direction</span>
+    <div class="seg">
+      <button id="down" data-dir="1">▼ Down</button>
+      <button id="up" data-dir="-1">▲ Up</button>
+    </div>
+  </section>
+
+  <section class="row">
+    <label for="atEnd">At the end</label>
+    <select id="atEnd">
+      <option value="stop">Stop</option>
+      <option value="wait">Wait for more (feeds)</option>
+      <option value="loop">Jump back & loop</option>
+      <option value="bounce">Bounce</option>
+    </select>
+  </section>
+
+  <section class="row">
+    <label for="pause">Pause when I scroll</label>
+    <input id="pause" type="checkbox" checked>
+  </section>
+
+  <p id="error" class="error" hidden>Chrome doesn't allow extensions on this page.</p>
+
+  <footer>
+    <div><kbd>Alt+Shift+S</kbd> start / stop</div>
+    <div><kbd>Alt+Shift+↑</kbd> <kbd>Alt+Shift+↓</kbd> speed</div>
+    <div>While scrolling: <kbd>Space</kbd> pause · <kbd>+</kbd> <kbd>−</kbd> speed · <kbd>Esc</kbd> stop</div>
+  </footer>
+  <script src="popup.js"></script>
+</body>
+</html>

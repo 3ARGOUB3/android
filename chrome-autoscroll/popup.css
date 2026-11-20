@@ -1,0 +1,40 @@
+:root {
+  --bg: #ffffff; --fg: #1b1b22; --muted: #6b6b78; --line: #e4e4ea;
+  --accent: #4f46e5; --accent-fg: #fff; --soft: #f2f2f7; --danger: #dc2626;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #1b1b22; --fg: #ececf1; --muted: #9a9aa8; --line: #33333d;
+          --accent: #818cf8; --accent-fg: #111; --soft: #26262f; --danger: #f87171; }
+}
+* { box-sizing: border-box; }
+body { width: 300px; margin: 0; padding: 14px; background: var(--bg); color: var(--fg);
+       font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+h1 { font-size: 15px; margin: 0; }
+.pill { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--soft); color: var(--muted); }
+.pill.on { background: #16a34a22; color: #16a34a; }
+.pill.paused { background: #ca8a0422; color: #ca8a04; }
+button { font: inherit; color: inherit; background: var(--soft); border: 1px solid var(--line);
+         border-radius: 8px; padding: 6px 8px; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+button.primary { width: 100%; padding: 10px; font-weight: 600; font-size: 14px;
+                 background: var(--accent); color: var(--accent-fg); border: none; }
+button.primary.stop { background: var(--danger); color: #fff; }
+section { margin-top: 14px; }
+label output { font-weight: 600; }
+input[type=range] { width: 100%; accent-color: var(--accent); margin: 6px 0; }
+input[type=checkbox] { accent-color: var(--accent); width: 16px; height: 16px; }
+.presets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.seg { display: flex; }
+.seg button { border-radius: 0; }
+.seg button:first-child { border-radius: 8px 0 0 8px; }
+.seg button:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+.seg button.active { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+select { font: inherit; color: var(--fg); background: var(--soft); border: 1px solid var(--line);
+         border-radius: 8px; padding: 5px; }
+.error { color: var(--danger); margin: 12px 0 0; }
+footer { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 11px; display: grid; gap: 4px; }
+kbd { font: 10px ui-monospace, monospace; padding: 1px 4px; border: 1px solid var(--line);
+      border-radius: 4px; background: var(--soft); }
